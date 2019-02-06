@@ -40,7 +40,7 @@ router.post('/students', function (req, res) {
     };
     console.log('\nStudent added!\n', response, '\n'); // Display response
 
-    //Create post with student data, delivered to mongoose server
+    //Create post with student data, delivered to mlabs server
     Student.create({
         student_id: req.body.student_id,
         student_name: req.body.student_name,
