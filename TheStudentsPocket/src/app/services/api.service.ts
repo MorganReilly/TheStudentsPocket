@@ -28,7 +28,7 @@ export class ApiService {
      * @title Adds a student.
      * @desc adds a student from the application.
      */
-    registerStudent(student_id: String, student_firstName: String, student_lastName, student_pin: Number): Observable<any> {
+    registerStudent(student_id: String, student_firstName: String, student_lastName: String, student_pin: String): Observable<any> {
        // Setting values from form to a student object to be sent in the body of a url post request:
         const student: Student = {
             student_id: student_id,
@@ -36,7 +36,8 @@ export class ApiService {
             student_lastName: student_lastName,
             student_pin: student_pin
         };
-        // POST data to backend:
+        console.log('Inside API: ' + student_id, student_firstName, student_lastName, student_pin);
+        // POST data to backend handle:
         return this.http.post('http://localhost:8081/api/students', student);
     }// End add student
 }// End class

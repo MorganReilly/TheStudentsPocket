@@ -10,7 +10,11 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+// Import for HTTP requests
+import {HttpClientModule} from '@angular/common/http';
+import {ApiService} from './services/api.service';
 
 @NgModule({
     declarations: [AppComponent, LoginComponent, RegisterComponent],
@@ -19,11 +23,14 @@ import {FormsModule} from '@angular/forms';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
+        HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
     ],
     providers: [
         StatusBar,
         SplashScreen,
+        ApiService,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

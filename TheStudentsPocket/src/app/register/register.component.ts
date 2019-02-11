@@ -20,16 +20,18 @@ export class RegisterComponent implements OnInit {
      * This will allow the user access his/her records upon login.
      * */
     registerUser(form: NgForm) {
-        // VALIDATION TO BE BE IMPLEMENTED
-
+        // TO-DO Validation to be added
         // Push data to api => to be pushed to database.
-        this.api.registerStudent(form.value.idNum, form.value.firstName, form.value.lastName, form.value.pinNum).subscribe(() => {
-
+        this.api.registerStudent(form.value.idNum, form.value.firstName, form.value.lastName, form.value.pin).subscribe(() => {
+            // user registered, now run login page.
         });
-
+        console.log(form.value);
+        form.resetForm(); // Reset the form
     }// End register user function
 
-    ngOnInit() {
+    ngOnInit(): void {
     }
-
 }// End class
+
+
+

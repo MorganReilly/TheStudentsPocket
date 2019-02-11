@@ -18,13 +18,13 @@ router.use(function (req, res, next) {
  * @desc gets a student from the database by student ID Number and name.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
-router.get('/students', function (req, res) {
-    Student.find({}, function (err, studentData) {  //function take error argument to handle any errors. Second parameters is data coming back from the server.
-        if (err) return res.status(500).send("There was a problem finding student records"); // Return error, error status and send back message
-        res.status(200).send(studentData);
-        console.log("\nStudent Records retrieved from the database");
-    });// End find
-}); // End GET REQUEST
+ router.get('/students', function (req, res) {
+     Student.find({}, function (err, studentData) {  //function take error argument to handle any errors. Second parameters is data coming back from the server.
+         if (err) return res.status(500).send("There was a problem finding student records"); // Return error, error status and send back message
+         res.status(200).send(studentData);
+         console.log("\nStudent Records retrieved from the database");
+     });// End find
+ }); // End GET REQUEST
 
 /**
  * @title CREATE STUDENT REQUEST.
@@ -35,20 +35,22 @@ router.post('/students', function (req, res) {
     //Wrap in a response to be used to display message on server console.
     let response = {
         student_id: req.body.student_id,
-        student_name: req.body.student_name,
+        student_firstName: req.body.student_firstName,
+        student_lastName: req.body.student_lastName,
         student_pin: req.body.student_pin
     };
-    console.log('\nStudent added!\n', response, '\n'); // Display response
+    console.log('\nStudent added\n', response, '\n'); // Display response
 
-    //Create post with student data, delivered to mlabs server
+    //Create an account with student data, delivered to mlabs server
     Student.create({
         student_id: req.body.student_id,
-        student_name: req.body.student_name,
+        student_firstName: req.body.student_firstName,
+        student_lastName: req.body.student_lastName,
         student_pin: req.body.student_pin
-    }, function (err, studentData) { //function take error argument to handle any errors. Second parameters is data coming back from the server.
+    }, function (err, user) { //function take error argument to handle any errors. Second parameters is data coming back from the server.
         if (err) return res.status(500).send("There was a problem adding the information to the database."); // Return error, error status and send back message
-        //Saved!
-        res.status(200).send(task);// Send back status, request complete.
+        //Saved
+        res.status(200).send(user);// Send back status, request complete.
     });//End create
 });//End POST REQUEST function
 
