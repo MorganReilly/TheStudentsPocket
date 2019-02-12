@@ -16,9 +16,19 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
+      title: 'List (Keep in or remove?)',
       url: '/list',
       icon: 'list'
+    },
+    {
+      title: 'Module Overview',
+      url: '/subject-overview',
+      icon: 'list'
+    },
+    {
+      title: 'Module Creation Page',
+      url: '/create-moduleinfo',
+      icon: 'create'
     }
   ];
 
