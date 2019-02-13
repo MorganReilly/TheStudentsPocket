@@ -13,14 +13,47 @@ const StudentSchema = new Schema({
         type: String,
         required: true
     },
-    student_lastName:{
+    student_lastName: {
         type: String,
         required: true
     },
     student_pin: {
         type: Number,
         required: true
-    }
+    },
+    subject_info: {
+        subject_name: {
+            type: String
+        },
+        subject_desc: {
+            type: String
+        },
+        // == GRADE =====================
+        subject_grade: {
+            grade: {
+                type: String
+            },
+            current_grade:{
+              type: String
+            },
+            grade_weight: {
+                type: Number
+            }
+        }, //End subject_grade
+
+        // == Timetable ================
+        timetable: {
+            day: {
+                type: String
+            },
+            time: {
+                type: String
+            },
+            room: {
+                type: String
+            }
+        },//End timetable
+    }, //End subject_info
 });
 
 // Compile model from schema
