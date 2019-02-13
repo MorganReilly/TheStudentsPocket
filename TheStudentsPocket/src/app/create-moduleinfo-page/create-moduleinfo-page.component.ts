@@ -12,4 +12,6 @@ export class CreateModuleinfoPageComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Ignore this comment
+
 }
