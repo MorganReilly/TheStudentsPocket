@@ -1,0 +1,64 @@
+<ion-content>
+    <ion-header>
+        Create Module
+    </ion-header>
+    <!-- Moodle Key, possible link up to enrolment page on moodle through link in resouces on home page -->
+    <ion-item>
+        <ion-label>Module Name:</ion-label>
+        <ion-input>
+
+        </ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>Module Description:</ion-label>
+        <ion-input>
+
+        </ion-input>
+    </ion-item>
+
+    <!-- Grade input fields, require module name -->
+    <ion-item [disabled]="true">
+        <ion-label>Grade Type: </ion-label>
+        <ion-input>
+
+        </ion-input>
+    </ion-item>
+    <ion-item [disabled]="true">
+        <ion-label>Grade Weight: </ion-label>
+        <ion-input>
+
+        </ion-input>
+    </ion-item>
+    <ion-item [disabled]="true">
+        <ion-label>Current Grade: </ion-label>
+        <ion-input>
+
+        </ion-input>
+    </ion-item>
+
+    <!-- Timetable input fields, require module name -->
+    <ion-item [disabled]="false">
+        <ion-label>Room: </ion-label>
+        <ion-input>
+
+        </ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime display-format="MMM DD, YYYY HH:mm"></ion-datetime>
+    </ion-item>
+
+    <!-- On button press: store and reset grade fields -->
+    <ion-button>
+        Input grade info
+    </ion-button>
+
+    <!-- On button press: store and reset timetable fields -->
+    <ion-button>
+        Input timetable info
+    </ion-button>
+
+</ion-content>
+
+

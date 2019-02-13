@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ignore} from 'selenium-webdriver/testing';
 import {SubjectOverviewComponent} from './subject-overview/subject-overview.component';
-import {CreateModuleinfoPageComponent} from './create-moduleinfo-page/create-moduleinfo-page.component';
+import {CreateModuleinfoPageComponent} from './create-moduleinfo/create-moduleinfo-page.component';
 
 // @ts-ignore
 // @ts-ignore
