@@ -3,26 +3,27 @@
         Create Module
     </ion-header>
     <!-- Moodle Key, possible link up to enrolment page on moodle through link in resouces on home page -->
-    <ion-item>
-        <ion-label>Moodle Key:</ion-label>
-        <ion-input>
+    <form class="contentForm" (submit)="addSubject(subject_form)" #subject_form="ngForm">
+        <ion-item>
+            <ion-label>Moodle Key:</ion-label>
+            <ion-input type="text" name="moodle_key" ngModel placeholder="Moodel Key"
+                       #moodle_key="ngModel">
+            </ion-input>
+        </ion-item>
 
-        </ion-input>
-    </ion-item>
+        <ion-item>
+            <ion-label>Module Name:</ion-label>
+            <ion-input type="text" name="module_name" ngModel required="true" placeholder="Module Name"
+                       #module_name="ngModel">
+            </ion-input>
+        </ion-item>
 
-    <ion-item>
-        <ion-label>Module Name:</ion-label>
-        <ion-input>
-
-        </ion-input>
-    </ion-item>
-
-    <ion-item>
-        <ion-label>Module Description:</ion-label>
-        <ion-input>
-        </ion-input>
-    </ion-item>
-
+        <ion-item>
+            <ion-label>Module Description:</ion-label>
+            <ion-input type="text" name="module_desc" ngModel placeholder="Module Description"
+                       #module_desc="ngModel">
+            </ion-input>
+        </ion-item>
+        <ion-button type="submit" [disabled]="!subject_form.form.valid">Add Subject</ion-button>
+    </form>
 </ion-content>
-
-

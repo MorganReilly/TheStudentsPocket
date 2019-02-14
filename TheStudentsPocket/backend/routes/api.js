@@ -37,7 +37,12 @@ router.post('/students', function (req, res) {
         student_id: req.body.student_id,
         student_firstName: req.body.student_firstName,
         student_lastName: req.body.student_lastName,
-        student_pin: req.body.student_pin
+        student_pin: req.body.student_pin,
+        subject_info: [{
+            subject_name: null, subject_desc: null,
+            subject_grade: {grade: null, current_grade: null, weight: null,}, // End subject_grade
+            timetable: {day: null, time: null, room: null}// End timetable
+        }] // End subject_info
     };
     console.log('\nStudent added\n', reg_student, '\n'); // Display response
 
@@ -48,6 +53,62 @@ router.post('/students', function (req, res) {
         res.status(200).send(user);// Send back status, request complete.
     });//End create
 });//End POST REQUEST function
+
+/**
+ * @title PUT REQUEST - New Subject entries. findOneAndUpdate()
+ * @desc updates a student by records by id number.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.put('/students/subjects/:student_id', function (req, res) {
+    //Log message to console
+    //console.log('\nSubject information added\n', subject_info, '\n');
+    Student.findOneAndUpdate(
+        //FIND BY STUDENT ID
+        req.params.student_id, {
+            $push: { //push new object into subject_info
+                subject_info: {
+                    subject_name: req.body.subject_name,
+                    subject_desc: req.body.subject_desc
+                } // End subject_info
+            },//Pass new subject information to db
+        }, function (err, data) {
+            if (err) return res.status(500).send('There was a problem updating the students record.');
+            res.status(200).send(data); //Callback
+            console.log('\nStudent record was updated!\n');
+        });
+});
+
+/**
+ * @title GET REQUEST, find()
+ * @desc gets a student by id number from the database.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/subjects/:student_id', function (req, res) {
+    Student.find({
+        student_id: req.params.student_id
+    }, function (err, data) {
+        if (err) return res.status(500).send("There was a problem finding modules.");
+        if (!data) return res.status(404).send("No module found.");
+        res.status(200).send(data);
+        console.log('\nModules found from database\n'); //Log the delete
+        console.log(data); // LOG data received back to server console
+    });
+});
+
+/**
+ * @title DELETE REQUEST, findByIdAndRemove().
+ * @desc deletes a subject by its id number from the database.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.delete('/students/subjects/:id', function (req, res) {
+    Student.findByIdAndRemove(
+        req.params.id
+        , function (err, data) { //function take error argument to handle any errors. Second parameters is data coming back from the server.
+            if (err) return res.status(500).send("There was a problem deleting the task.");
+            res.status(200).json("Subject " + data + " was deleted.");
+            console.log('\nDeleted subject from students records\n'); //Log the delete
+        });
+});//End DELETE REQUEST
 
 // Export router as a module.
 module.exports = router;
