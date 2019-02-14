@@ -24,3 +24,5 @@ export class CreateModuleinfoPageComponent implements OnInit {
         form.resetForm();
     }// End addSubject function
 }// End class
+
+
