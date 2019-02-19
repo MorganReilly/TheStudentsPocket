@@ -1,40 +1,27 @@
-    /*
+/*
     INSTALLED PACKAGES:
     npm install express --save
     npm install body-parser --save
-    npm install mongoose            : https://mongoosejs.com/docs/index.html
-    npm install -g nodemon          : https://nodemon.io/
-
-    Help Webpages:
-    https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
-    https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
+    npm install mysql     : https://www.w3schools.com/nodejs/nodejs_mysql.asp
+    npm install cors      : https://www.npmjs.com/package/cors
 */
 // Variables
 const express = require('express');
-const bodyParser = require('body-parser'); // Need for post methods
-//Mongoose & mLab Variables
-const mongoose = require('mongoose');
-const config = require('./config/database');
-
+const bodyParser = require('body-parser');
+const cors = require('cors');
 // Declare a variable for API route
 const api = require('./routes/api');
 const app = express();
 
-// Create a connection to MongoDB
-mongoose.Promise = require('bluebird');
-mongoose.connect(config.database, { useNewUrlParser: true, promiseLibrary: require('bluebird') })
-    .then(() => console.log('Connection successful!'))
-    .catch((err) => console.error(err));
-
-// Create application/x-www-form-urlencoded parser
-app.use(express.urlencoded({ extended: true }));
+// Create application/x-www-form-urlencoded parser & Cors
+app.use(cors({origin: 'http://localhost:4200'}));
+app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
-//Add API route to the endpoint URL after other `use` function.
+
+//Add API route to the endpoint URL.
 app.use('/api', api); //Use API
 
-/**
- * Server listen, running on localhost:8081
- */
+/* Server listen, running on localhost:8081 */
 const server = app.listen(8081, function () {
     const host = server.address().address;
     const port = server.address().port;

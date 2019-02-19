@@ -9,16 +9,11 @@ import {Subject} from '../subject.model';
 })
 export class ApiService {
 
-    constructor(private http: HttpClient) {
-    }
-
     // Array of student data
     private students: Student[] = [];
 
-    // FOR TESTING ONLY : HARDCODED STUDENTID. This is a user in the database
-    student_id: String = 'G0012345';
-
-    // More requests to be added.
+    constructor(private http: HttpClient) {
+    }
 
     /**
      * @title Get student data.
@@ -54,33 +49,34 @@ export class ApiService {
      * @param subject_desc
      * @Note student ID must be passed in the URL followed by the subject object in the body of the request.
      */
-    addSubject(subject_name: String, subject_desc: String): Observable<any> {
-        const subject: Subject = {
-            subject_name: subject_name,
-            subject_desc: subject_desc
-        };
+    // addSubject(subject_name: String, subject_desc: String): Observable<any> {
+    //     const subject: Subject = {
+    //         subject_name: subject_name,
+    //         subject_desc: subject_desc
+    //     };
         // Log message to server console:
-        console.log('Inside API: ' + subject_name, subject_desc);
+        // console.log('Inside API: ' + subject_name, subject_desc);
 
         // PUT REQUEST to server:
-        return this.http.put('http://localhost:8081/api/students/subjects/' + this.student_id, subject);
-    }// End addSubject function
+        // return this.http.put('http://localhost:8081/api/students/subjects/' + this.student_id, subject);
+    // }// End addSubject function
 
     /**
      * @title Gets all modules.
      * @desc gets all the modules a student has entered into there account.
      * @Note student ID must be passed in the URL followed by the subject object in the body of the request.
      */
-    getAllModules(): Observable<any> {
-        return this.http.get('http://localhost:8081/api/students/subjects/' + this.student_id);
-    }// End getAllModules function
+    //getAllModules(): Observable<any> {
+      //  return this.http.get('http://localhost:8081/api/students/subjects/');
+    //}// End getAllModules function
 
     /**
      * @title Deletes a subject
      * @desc deletes a selected subject from the database.
      * @note passes String, Server takes care of the request.
+     * Pass Student ID as first param and then the subject id as the second param.
      */
-    deleteSubject(id: String): Observable<any> {
-        return this.http.delete('http://localhost:8081/api/students/subjects/' + id);
-    }
+   // deleteSubject(id: String): Observable<any> {
+     //   return this.http.delete('http://localhost:8081/api/students/subjects/' + this.student_id +  id);
+    //}
 }// End class

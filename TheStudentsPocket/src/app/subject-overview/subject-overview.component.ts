@@ -12,6 +12,7 @@ export class SubjectOverviewComponent implements OnInit {
     modules: any = [];
 
     constructor(private api: ApiService) {
+
     }
 
     // TO-DO Complete this delete function working on sub documents

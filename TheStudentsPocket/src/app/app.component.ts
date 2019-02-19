@@ -16,7 +16,7 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List (Keep in or remove?)',
+      title: 'List (Keep in or delete?)',
       url: '/list',
       icon: 'list'
     },
