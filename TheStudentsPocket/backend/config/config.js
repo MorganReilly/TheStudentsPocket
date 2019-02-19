@@ -4,7 +4,8 @@ let mysql = require('mysql');
 let connection = mysql.createConnection({
     host: "ppit.caevmcdxjhby.eu-west-1.rds.amazonaws.com",
     user: "cathalmorgan",
-    password: "Admin2019"
+    password: "Admin2019",
+    database: "the_students_pocket"
 });
 
 // Connect to the mysql database.

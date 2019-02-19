@@ -16,9 +16,9 @@ export class CreateModuleinfoPageComponent implements OnInit {
     }
 
     addSubject(form: NgForm) {
-        this.api.addSubject(form.value.module_name, form.value.module_desc).subscribe(() => {
+        // this.api.addSubject(form.value.module_name, form.value.module_desc).subscribe(() => {
 
-        });
+        // });
         // Display form values to console
         console.log(form.value);
         form.resetForm();
