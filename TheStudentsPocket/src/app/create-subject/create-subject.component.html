@@ -1,0 +1,13 @@
+<div mat-dialog-content>
+    <form class="subject-form" (submit)="addSubject(subject_form)" #subject_form="ngForm">
+        <mat-form-field>
+            <input matInput type="text" name="module_name" ngModel required="true" placeholder="Module Name"
+                   #module_name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="module_desc" ngModel placeholder="Module Description"
+                   #module_desc="ngModel">
+        </mat-form-field>
+        <ion-button type="submit" [disabled]="!subject_form.form.valid">Add Subject</ion-button>
+    </form>
+</div>

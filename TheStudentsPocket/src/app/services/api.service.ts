@@ -14,8 +14,7 @@ import {Subject} from '../subject.model';
 export class ApiService {
 
     // Array of student data
-    private students: Student[] = [];
-    private student_id = 'G00346889';
+    private student_id = 'G00346889'; // HARDCODED subject_id for testing.
 
     constructor(private http: HttpClient) {
     }
@@ -64,7 +63,7 @@ export class ApiService {
 
         // PUT REQUEST to server:
         // this.student_id hardcoded for testing only...
-        return this.http.put('http://localhost:8081/api/students/subjects', subject);
+        return this.http.post('http://localhost:8081/api/students/subjects', subject);
     }// End addSubject function
 
     /**
@@ -84,5 +83,32 @@ export class ApiService {
      */
     deleteSubject(id: number): Observable<any> {
         return this.http.delete('http://localhost:8081/api/students/subjects/' + id);
-    }
+    }// end delete subject function
+
+    /**
+     * @title GET a subject
+     * @desc gets one subject from a students records by the students id and id of the subject
+     * @param id.
+     * @Note student ID must be passed in the URL followed by the subject object in the body of the request.
+     */
+    getSubject(id: number): Observable<any> {
+        return this.http.get('http://localhost:8081/api/students/subjects/subject/' + this.student_id + '&' + id);
+    }// End get subject function
+
+    /**
+     * @title EDIT a subject
+     * @desc updates a subjects records by the subject id.
+     * @param id
+     * @param subject_name
+     * @param subject_desc
+     * @Note student ID must be passed in the URL followed by the subject object in the body of the request.
+     */
+    editSubject(id: number, subject_name: String, subject_desc: String): Observable<any> {
+        const subject: Subject = {
+            student_id: this.student_id,
+            subject_name: subject_name,
+            subject_desc: subject_desc
+        };
+        return this.http.put('http://localhost:8081/api/students/subjects/subject/' + id, subject);
+    }// End edit subject function
 }// End class

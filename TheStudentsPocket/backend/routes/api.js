@@ -6,6 +6,16 @@ let StudentInfo = require('../models/student_info');
 let SubjectInfo = require('../models/subject_info');
 let Grade = require('../models/subject_grade_info');
 
+//====== Auth function for user login ===========================================================================
+router.post('/auth', function (req, res) {
+    StudentInfo.auth(req.body.student_id, req.body.student_pin, function (err, data) {
+        if (err) res.send(err);
+        console.log(data);
+        //Complete! sendback
+        res.send(data);
+    });
+});
+
 // ====== START STUDENT_INFO ROUTES ==============================================================================
 /**
  * @title GET REQUEST, getAllStudentInfo()
@@ -53,17 +63,17 @@ router.post('/students', function (req, res) {
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.delete('/students/:id', function (req, res) {
-        StudentInfo.delete( req.params.student_id, function(err, data) {
+    StudentInfo.delete(req.params.student_id, function (err, data) {
         if (err) res.send(err);
         //Complete!
-        res.json({ message: 'Student successfully deleted' }, data);
+        res.json({message: 'Student successfully deleted'}, data);
     });
 });//End DELETE REQUEST
 
 // ====== END STUDENT_INFO ROUTES ================================================================================
 
 /**
- * @title GET REQUEST, getAllSubjectInfo()
+ * @title GET ALL SUBJECTS REQUEST, getAllSubjectInfo()
  * @desc gets all students info from the database.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
@@ -77,11 +87,27 @@ router.get('/students/subjects/:student_id', function (req, res) {
 }); // End GET REQUEST
 
 /**
- * @title CREATE SUBJECT REQUEST.
+ * @title GET SUBJECT REQUEST, getSubject()
+ * @desc gets a subject from a students records by the subject ID
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/subjects/subject/:student_id&:id', function (req, res) {
+    console.log(req.body.student_id, req.params.id);
+    SubjectInfo.getSubject(req.params.student_id, req.params.id, function (err, data) {
+        if (err) res.send(err);
+        console.log(data);
+        //Complete! sendback
+        res.send(data);
+    });
+}); // End GET REQUEST
+
+
+/**
+ * @title CREATE NEW SUBJECT REQUEST.
  * @desc posts the created student object to the database.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
-router.post('/students/subjects', function (req, res) {
+router.post('/students/subjects/', function (req, res) {
     //New student object created from values passed in the body of the URL POST Request
     let new_subject = new SubjectInfo({
         student_id: req.body.student_id,
@@ -89,13 +115,13 @@ router.post('/students/subjects', function (req, res) {
         subject_desc: req.body.subject_desc
     });
 
-    console.log(req.body.student_id, req.body.subject_name,  req.body.subject_desc);
+    console.log(req.body.student_id, req.body.subject_name, req.body.subject_desc);
 
     // Handle for null errors if any
-    if (!new_subject.student_id || !new_subject.subject_name || !new_subject.subject_desc) {
-        res.status(400).send({error: true, message: 'Please provide all criteria!!!!!!!!!!'});
+    if (!new_subject.student_id || !new_subject.subject_name) {
+        res.status(400).send({error: true, message: 'Please provide all criteria!'});
     } else {
-        SubjectInfo.createSubject(new_subject,function (err, data) {
+        SubjectInfo.createSubject(new_subject, function (err, data) {
             if (err) res.send(err);
             //Complete!
             res.json(data); //sendback request
@@ -103,13 +129,35 @@ router.post('/students/subjects', function (req, res) {
     }// End if else
 });//End POST REQUEST function
 
+
+router.put('/students/subjects/subject/:id', function (req, res) {
+    //New student object created from values passed in the body of the URL POST Request
+    let updatedSubject={
+        subject_name: req.body.subject_name,
+        subject_desc: req.body.subject_desc
+    };
+
+    console.log(updatedSubject);
+    // Handle for null errors if any
+    if (!updatedSubject.subject_name) {
+        res.status(400).send({error: true, message: 'Please provide a subject name'});
+    } else {
+        SubjectInfo.update(updatedSubject, req.params.id, function (err, data) {
+            if (err) res.send(err);
+            //Complete!
+            res.json(data); //sendback request
+        });
+    }// End if else
+});//End POST REQUEST function
+
+
 /**
  * @title DELETE REQUEST
  * @desc deletes a subject by its id number from the database.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.delete('/students/subjects/:id', function (req, res) {
-    SubjectInfo.delete( req.params.id, function(err, data) {
+    SubjectInfo.delete(req.params.id, function (err, data) {
         if (err) res.send(err);
         //Complete!
         res.json(data);
@@ -165,10 +213,10 @@ router.post('/students/subject/grades', function (req, res) {
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.delete('/students/subjects/grades/:id', function (req, res) {
-    StudentInfo.delete( req.params.student_id, function(err, data) {
+    StudentInfo.delete(req.params.student_id, function (err, data) {
         if (err) res.send(err);
         //Complete!
-        res.json({ message: 'Grade successfully deleted' }, data);
+        res.json({message: 'Grade successfully deleted'}, data);
     });
 });//End DELETE REQUEST
 

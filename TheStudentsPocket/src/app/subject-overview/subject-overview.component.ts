@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../services/api.service';
+import {CreateSubjectComponent} from '../create-subject/create-subject.component';
 
 @Component({
     selector: 'app-subject-overview',
@@ -11,15 +12,19 @@ export class SubjectOverviewComponent implements OnInit {
     // Variables
     modules: any = [];
 
-    constructor(private api: ApiService) {
-
+    constructor(private api: ApiService, private createCon: CreateSubjectComponent) {
     }
 
-    // TO-DO Complete this delete function working on sub documents
+    // Function to open create a subject disalog box
+    openDialog() {
+        this.createCon.openDialog();
+    }
+
+   // Delete subject by its id number
     onDelete(id: number) {
         console.log('Deleted Subject' + id);
         this.api.deleteSubject(id).subscribe(() => {
-            //this.ngOnInit(); // Refresh the page
+            this.ngOnInit(); // Refresh the page once update to records is complete
         });
     } // End delete function
 

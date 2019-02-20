@@ -2,7 +2,10 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {RegisterComponent} from './register/register.component';
 import {SubjectOverviewComponent} from './subject-overview/subject-overview.component';
-import {CreateModuleinfoPageComponent} from './create-moduleinfo-page/create-moduleinfo-page.component';
+import {CreateSubjectComponent} from './create-subject/create-subject.component';
+import {TimetableComponent} from './timetable/timetable.component';
+import {EditSubjectComponent} from './edit-subject/edit-subject.component';
+import {LoginComponent} from './login/login.component';
 
 const routes: Routes = [
     {
@@ -15,12 +18,12 @@ const routes: Routes = [
         loadChildren: './home/home.module#HomePageModule'
     },
     {
-        path: 'list',
-        loadChildren: './list/list.module#ListPageModule'
-    },
-    { // JUST FOR TESTING PURPOSES ONLY!
         path: 'register',
         component: RegisterComponent
+    },
+    {
+        path: 'login',
+        component: LoginComponent
     },
     {
         path: 'subject-overview',
@@ -28,7 +31,15 @@ const routes: Routes = [
     },
     {
         path: 'create-moduleinfo',
-        component: CreateModuleinfoPageComponent
+        component: CreateSubjectComponent
+    },
+    {
+        path: 'timetable',
+        component: TimetableComponent
+    },
+    {
+        path: 'edit-subject/:id',
+        component: EditSubjectComponent
     }
 ];
 

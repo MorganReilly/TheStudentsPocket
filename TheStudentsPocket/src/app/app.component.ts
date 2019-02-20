@@ -16,8 +16,8 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List (Keep in or delete?)',
-      url: '/list',
+      title: 'Timetable',
+      url: '/timetable',
       icon: 'list'
     },
     {

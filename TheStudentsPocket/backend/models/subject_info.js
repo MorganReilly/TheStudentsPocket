@@ -28,7 +28,33 @@ SubjectInfo.createSubject = function createSubject(newSubject, result) {
 
 // Get all subject information:
 SubjectInfo.getAllSubjectInfo = function (student_id, result) {
-    sql.query('SELECT * from subject_info where student_id = ?',[student_id],  function (err, res) {
+    sql.query('SELECT * from subject_info where student_id = ?', [student_id], function (err, res) {
+        if (err) {
+            console.log(err);
+            result(null, err);
+        } else {
+            console.log(res);
+            result(null, res);
+        }
+    });
+};
+
+// Get a subject;
+SubjectInfo.getSubject = function (student_id, id, result) {
+    sql.query('SELECT * from subject_info where student_id = ? AND id = ? ', [student_id, id], function (err, res) {
+        if (err) {
+            console.log(err);
+            result(null, err);
+        } else {
+            console.log(res);
+            result(null, res);
+        }
+    });
+};
+
+// Update a subject record
+SubjectInfo.update = function (updatedSubject, id, result) {
+    sql.query("UPDATE subject_info SET ? WHERE id = ?", [updatedSubject, id], function (err, res) {
         if (err) {
             console.log(err);
             result(null, err);
@@ -42,10 +68,10 @@ SubjectInfo.getAllSubjectInfo = function (student_id, result) {
 // Delete a subject from a students record in the database:
 SubjectInfo.delete = function (id, result) {
     sql.query('DELETE from subject_info WHERE id = ?', [id], function (err, res) {
-        if(err){
+        if (err) {
             console.log(err);
             result(null, err);
-        }else {
+        } else {
             result(null, res)
         }
     });

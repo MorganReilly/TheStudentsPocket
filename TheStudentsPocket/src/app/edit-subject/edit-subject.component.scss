@@ -1,0 +1,34 @@
+.content{
+  display: block;
+  flex-direction: column;
+  max-width: 400px;
+  margin: auto;
+}
+
+.mat-dialog-content {
+  display: block;
+  flex-direction: row;
+  margin: auto;
+}
+
+.subject-form{
+  width: 100%;
+}
+
+.mat-form-field{
+  display: block;
+  position: relative;
+  text-align: left;
+}
+
+.mat-radio-button {
+  padding: 10px
+}
+
+.buttons{
+  padding: 15px
+}
+
+.submit-button{
+  float: right;
+}
