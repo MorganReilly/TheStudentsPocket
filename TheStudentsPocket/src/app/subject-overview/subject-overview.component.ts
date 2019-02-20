@@ -16,17 +16,17 @@ export class SubjectOverviewComponent implements OnInit {
     }
 
     // TO-DO Complete this delete function working on sub documents
-    onDelete(id: string) {
+    onDelete(id: number) {
         console.log('Deleted Subject' + id);
-        //this.api.deleteSubject(id).subscribe(() => {
-          //  this.ngOnInit(); // Refresh the page
-        //});
+        this.api.deleteSubject(id).subscribe(() => {
+            //this.ngOnInit(); // Refresh the page
+        });
     } // End delete function
 
     ngOnInit() {
-        // this.api.getAllModules().subscribe(data => {
-        //     this.modules = data;
-        //     console.log(data);
-        // });
+        this.api.getAllModules().subscribe(data => {
+            this.modules = data;
+            console.log(data);
+        });
     }// End function
 }// End class

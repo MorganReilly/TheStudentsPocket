@@ -3,11 +3,11 @@
         <!-- Cards for subject-->
         <!-- Retrieve from db and populate in single ion-card tag -->
         <!-- Local array with complete student object -->
-        <ion-card *ngFor="let subject of module.subject_info">
+        <ion-card >
             <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
             <ion-card-header>
-                <ion-card-title>{{subject.subject_name}}</ion-card-title>
-                <ion-card-subtitle>{{subject.subject_desc}}</ion-card-subtitle>
+                <ion-card-title>{{module.subject_name}}</ion-card-title>
+                <ion-card-subtitle>{{module.subject_desc}}</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -18,7 +18,7 @@
             </ion-card-content>
             <ion-button>Modify Subject Info</ion-button>
             <!-- Deletes by the subjects _id -->
-            <ion-button (click)="onDelete(subject._id)">Delete Subject</ion-button>
+            <ion-button (click)="onDelete(module.id)">Delete Subject</ion-button>
         </ion-card>
 
         <!-- Button to create subject component -->
