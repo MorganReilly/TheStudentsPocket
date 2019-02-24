@@ -6,16 +6,19 @@ import {CreateSubjectComponent} from './create-subject/create-subject.component'
 import {TimetableComponent} from './timetable/timetable.component';
 import {EditSubjectComponent} from './edit-subject/edit-subject.component';
 import {LoginComponent} from './login/login.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
     {
         path: '',
         redirectTo: 'home',
-        pathMatch: 'full'
+        pathMatch: 'full',
+        canActivate: [AuthGuard] // Authentication protection
     },
     {
         path: 'home',
-        loadChildren: './home/home.module#HomePageModule'
+        loadChildren: './home/home.module#HomePageModule',
+        canActivate: [AuthGuard]
     },
     {
         path: 'register',
@@ -27,19 +30,23 @@ const routes: Routes = [
     },
     {
         path: 'subject-overview',
-        component: SubjectOverviewComponent
+        component: SubjectOverviewComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'create-moduleinfo',
-        component: CreateSubjectComponent
+        component: CreateSubjectComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'timetable',
-        component: TimetableComponent
+        component: TimetableComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'edit-subject/:id',
-        component: EditSubjectComponent
+        component: EditSubjectComponent,
+        canActivate: [AuthGuard]
     }
 ];
 

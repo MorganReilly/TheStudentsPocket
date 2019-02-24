@@ -4,20 +4,31 @@ import {Observable} from 'rxjs';
 import {Student} from '../student.model';
 import {Subject} from '../subject.model';
 
-/* @title API Class
+/* @title APIService Class
  * @desc allows data to be passed to and from the backend where routes to databases are.
  */
+
+// Interface used for isLoggedIn requests.
+interface isLoggedIn {
+    status: boolean;
+}
 
 @Injectable({
     providedIn: 'root'
 })
 export class ApiService {
-
     // Array of student data
     private student_id = 'G00346889'; // HARDCODED subject_id for testing.
 
     constructor(private http: HttpClient) {
+
     }
+
+    // Function to check if the user has a logged in session:
+    isLoggedIn(): Observable<isLoggedIn> {
+        console.log('IS LOGGED IN REQUEST SENT TO SERVER!');
+        return this.http.get<isLoggedIn>('http://localhost:8081/api/auth', {withCredentials: true});
+    }// End isLoggedIn function
 
     /**
      * @title Get student data.
@@ -59,7 +70,7 @@ export class ApiService {
             subject_desc: subject_desc
         };
         // Log message to server console:
-        console.log('Inside API: ' +  subject);
+        console.log('Inside API: ' + subject);
 
         // PUT REQUEST to server:
         // this.student_id hardcoded for testing only...

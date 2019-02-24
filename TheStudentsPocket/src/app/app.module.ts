@@ -14,7 +14,8 @@ import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
 import {CreateSubjectComponent} from './create-subject/create-subject.component';
 import {RouteReuseStrategy} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { TimetableComponent } from './timetable/timetable.component';
+import {TimetableComponent} from './timetable/timetable.component';
+import {AuthGuard} from './auth.guard';
 
 import {
     MatButtonModule,
@@ -33,8 +34,8 @@ import {
     MatSlideToggleModule,
     MatToolbarModule
 } from '@angular/material';
-import { EditSubjectComponent } from './edit-subject/edit-subject.component';
-import { GradesComponent } from './grades/grades.component';
+import {EditSubjectComponent} from './edit-subject/edit-subject.component';
+import {GradesComponent} from './grades/grades.component';
 
 
 @NgModule({
@@ -83,6 +84,7 @@ import { GradesComponent } from './grades/grades.component';
         SplashScreen,
         ApiService,
         CreateSubjectComponent,
+        AuthGuard,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent]

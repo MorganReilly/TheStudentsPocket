@@ -3,23 +3,51 @@
     npm install express --save
     npm install body-parser --save
     npm install mysql     : https://www.w3schools.com/nodejs/nodejs_mysql.asp
-    npm install cors      : https://www.npmjs.com/package/cors
+    npm install express-session --save
 */
 // Variables
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 // Declare a variable for API route
 const api = require('./routes/api');
 const app = express();
+const session = require('express-session');
 
-// Create application/x-www-form-urlencoded parser & Cors
-app.use(cors({origin: 'http://localhost:4200'}));
-app.use(express.urlencoded({extended: true}));
 app.use(bodyParser.json());
-
+app.use(bodyParser.urlencoded({extended: true}));
+// Create application/x-www-form-urlencoded parser & Cors
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', req.headers.origin);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+    if ('OPTIONS' === req.method) {
+        res.status(200).send();
+    } else {
+        next();
+    }
+});
+// saveUninitialized is set to false as we want to auth first
+app.use(session({
+    name: 'cookie_monster',
+    secret: 'secret', //Secret for signing cookies
+    resave: false, // Force save for each request
+    saveUninitialized: false, // Save a session that is new, but has not been modified
+    cookie: {
+        expires: 3600000, //after 1 hour
+    } // End cookie
+}));
 //Add API route to the endpoint URL.
 app.use('/api', api); //Use API
+
+// This middleware will check if user's cookie is still saved in browser and user is not set, then automatically log the user out.
+app.use((req, res, next) => {
+    console.log(req.cookies.student_id);
+    if (req.cookies.student_id) {
+        res.clearCookie('cookie_monster');
+    }// end if
+    next();
+});
 
 /* Server listen, running on localhost:8081 */
 const server = app.listen(8081, function () {

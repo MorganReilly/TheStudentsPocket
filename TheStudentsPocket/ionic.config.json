@@ -1,5 +1,7 @@
 {
   "name": "TheStudentsPocket",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

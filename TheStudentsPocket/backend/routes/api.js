@@ -4,15 +4,48 @@ let router = express.Router();
 // Import StudentInfo model:
 let StudentInfo = require('../models/student_info');
 let SubjectInfo = require('../models/subject_info');
+let StudentLogin = require('../models/authentication');
 let Grade = require('../models/subject_grade_info');
 
+// middleware function to check for logged-in users
+/**
+ * @title GET REQUEST, Middleware.
+ * @desc check for logged-in users with a active session.
+ * @note executes immediately, passing results to callback.
+ */
+router.get('/auth', function (req, res) {
+    if (req.session.student_id) {
+        res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
+            status: true
+        });
+    } else {
+        //Authentication request fail return false:
+        res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
+            status: false
+        });
+        console.log('Authentication request fail!');
+    }
+});
+
 //====== Auth function for user login ===========================================================================
+/**
+ * @title POST REQUEST, Authentication().
+ * @desc checks the database with the parameters passed to see if a user exits.
+ * @note executes immediately, passing results to callback. If a user is authenticated a session cookies is issued.
+ * Logs the data to the server console.
+ */
 router.post('/auth', function (req, res) {
-    StudentInfo.auth(req.body.student_id, req.body.student_pin, function (err, data) {
-        if (err) res.send(err);
-        console.log(data);
+    StudentLogin.auth(req.body.student_id, req.body.student_pin, function (err, data) {
+        if (err) res.send(err); //SQL Error handle
         //Complete! sendback
-        res.send(data);
+        if (data.success) { // Hand out cookie if auth is = true
+            //User has been authenticated set cookie:
+            req.session.student_id = req.body.student_id;
+            // sendback
+            res.send(data);
+        } else {//end if else
+            res.end();
+        } // End if else.
     });
 });
 
@@ -71,6 +104,7 @@ router.delete('/students/:id', function (req, res) {
 });//End DELETE REQUEST
 
 // ====== END STUDENT_INFO ROUTES ================================================================================
+// ====== START SUBJECT_INFO ROUTES ==============================================================================
 
 /**
  * @title GET ALL SUBJECTS REQUEST, getAllSubjectInfo()
@@ -129,10 +163,14 @@ router.post('/students/subjects/', function (req, res) {
     }// End if else
 });//End POST REQUEST function
 
-
+/**
+ * @title PUT REQUEST, UPDATE().
+ * @desc finds a subject by its id number in the database and updates it.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
 router.put('/students/subjects/subject/:id', function (req, res) {
     //New student object created from values passed in the body of the URL POST Request
-    let updatedSubject={
+    let updatedSubject = {
         subject_name: req.body.subject_name,
         subject_desc: req.body.subject_desc
     };
@@ -165,6 +203,7 @@ router.delete('/students/subjects/:id', function (req, res) {
 });//End DELETE REQUEST
 
 // ====== END SUBJECT_INFO ROUTES ================================================================================
+// ====== START SUBJECT_GRADE ROUTES =============================================================================
 
 /**
  * @title GET REQUEST, getAllSubjectInfo()

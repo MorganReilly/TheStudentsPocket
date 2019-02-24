@@ -33,5 +33,4 @@ export class EditSubjectComponent implements OnInit {
             this.subject = data; // API JSON data received from the server passed into tasks array
         });
     }// End ngOnInit
-
-}
+}// End class

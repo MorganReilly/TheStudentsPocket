@@ -1,6 +1,15 @@
-<form (submit)="login($event)">
+<form class="subject-form" (submit)="login(loginForm)" #loginForm="ngForm">
 
-  <input type="text" placeholder="StudentID" id="student_id">
-  <input type="password" placeholder="Pin number" id="pin">
-  <input type="submit" value="Submit">
+  <mat-form-field>
+    <input matInput type="text" name="student_id" ngModel required="true"
+           placeholder="Student ID"
+           #student_id="ngModel">
+    <mat-error *ngIf="student_id.invalid">Please enter a student id.</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" name="pin" ngModel
+           placeholder="Pin number"
+           #pin="ngModel">
+  </mat-form-field>
+  <button mat-raised-button color="accent" type="submit" [disabled]="!loginForm.form.valid">Update Post</button>
 </form>
