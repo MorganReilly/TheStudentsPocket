@@ -7,14 +7,16 @@ let SubjectInfo = require('../models/subject_info');
 let StudentLogin = require('../models/authentication');
 let Grade = require('../models/subject_grade_info');
 
-// middleware function to check for logged-in users
 /**
  * @title GET REQUEST, Middleware.
  * @desc check for logged-in users with a active session.
  * @note executes immediately, passing results to callback.
  */
-router.get('/auth', function (req, res) {
-    if (req.session.student_id) {
+router.get('/auth',  function (req, res) {
+    console.log(req.session);
+    console.log(req.session.student_id);
+    if (req.session.student_id && req.cookies.cookie_monster) {
+        console.log(req.session);
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: true
         });
@@ -23,8 +25,9 @@ router.get('/auth', function (req, res) {
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: false
         });
-        console.log('Authentication request fail!');
+      //  console.log('Authentication request fail!');
     }
+
 });
 
 //====== Auth function for user login ===========================================================================
