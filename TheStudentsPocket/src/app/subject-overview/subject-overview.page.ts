@@ -1,18 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {CreateSubjectPage} from '../create-subject/create-subject.page';
 import {ApiService} from '../services/api.service';
-import {CreateSubjectComponent} from '../create-subject/create-subject.component';
 
 @Component({
-    selector: 'app-subject-overview',
-    templateUrl: './subject-overview.component.html',
-    styleUrls: ['./subject-overview.component.scss']
+  selector: 'app-subject-overview',
+  templateUrl: './subject-overview.page.html',
+  styleUrls: ['./subject-overview.page.scss'],
 })
-export class SubjectOverviewComponent implements OnInit {
+export class SubjectOverviewPage implements OnInit {
 
     // Variables
     modules: any = [];
 
-    constructor(private api: ApiService, private createCon: CreateSubjectComponent) {
+    constructor(private api: ApiService, private createCon: CreateSubjectPage) {
     }
 
     // Function to open create a subject disalog box
@@ -20,7 +20,7 @@ export class SubjectOverviewComponent implements OnInit {
         this.createCon.openDialog();
     }
 
-   // Delete subject by its id number
+    // Delete subject by its id number
     onDelete(id: number) {
         console.log('Deleted Subject' + id);
         this.api.deleteSubject(id).subscribe(() => {
@@ -35,3 +35,5 @@ export class SubjectOverviewComponent implements OnInit {
         });
     }// End function
 }// End class
+
+

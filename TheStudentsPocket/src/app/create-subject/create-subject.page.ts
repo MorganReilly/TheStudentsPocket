@@ -3,13 +3,12 @@ import {NgForm} from '@angular/forms';
 import {ApiService} from '../services/api.service';
 import {MatDialog} from '@angular/material';
 
-
 @Component({
-    selector: 'app-create-moduleinfo-page',
-    templateUrl: './create-subject.component.html',
-    styleUrls: ['./create-subject.component.scss']
+    selector: 'app-create-subject',
+    templateUrl: './create-subject.page.html',
+    styleUrls: ['./create-subject.page.scss'],
 })
-export class CreateSubjectComponent implements OnInit {
+export class CreateSubjectPage implements OnInit {
 
     constructor(private api: ApiService, public dialog: MatDialog) {
     }
@@ -19,10 +18,10 @@ export class CreateSubjectComponent implements OnInit {
      * @desc Function used to open up a popout dialog box to display the create form from create.component
      * Used imports:
      *      - import { MatDialog }
-     *      - import { CreateSubjectComponent }
+     *      - import { CreateSubjectPage }
      */
     openDialog() {
-        const dialogRef = this.dialog.open(CreateSubjectComponent); // Display CreateComponent inside dialog box.
+        const dialogRef = this.dialog.open(CreateSubjectPage); // Display CreateComponent inside dialog box.
 
         dialogRef.afterClosed().subscribe(result => { // Close and log the results
             console.log(`Dialog result: ${result}`);
@@ -30,11 +29,11 @@ export class CreateSubjectComponent implements OnInit {
     }// End function
 
     /**
-     * @title Close Create task CreateComponent dialog
+     * @title Close Create Subject dialog
      * @desc Function used to close popout dialog box that display the create form from CreateSubjectComponent
      * Used imports:
      *      - import { MatDialog }
-     *      - import { CreateComonent }
+     *      - import { CreateSubject }
      */
     closeDialog() {
         this.dialog.closeAll();
@@ -54,5 +53,3 @@ export class CreateSubjectComponent implements OnInit {
     }
 
 }// End class
-
-

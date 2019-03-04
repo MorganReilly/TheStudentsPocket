@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
 
 /* @title AuthService Class
  * @desc allows data to be passed to and from the backend where routes to databases are.

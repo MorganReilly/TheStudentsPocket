@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Register</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<div class="content">
+  <form class="register-form" (submit)="registerUser(registerForm)" #registerForm="ngForm">
+    <ion-input type="text" name="firstName" ngModel required="true" placeholder="First name"
+               #firstName="ngModel">
+    </ion-input>
+    <ion-input type="text" name="lastName" ngModel required="true" placeholder="Last name"
+               #lastName="ngModel"></ion-input>
+    <ion-input type="text" name="idNum" ngModel required="true" placeholder="Student ID"
+               #idNum="ngModel"></ion-input>
+    <ion-input type="password" name="pin" minlength="6" ngModel required="true"
+               placeholder="Please enter a pin" #pin="ngModel"></ion-input>
+    <ion-input type="password" name="confirmPin" minlength="6" ngModel required="true"
+               placeholder="Please re-enter your pin" #confirmPin="ngModel"></ion-input>
+
+    <ion-button type="submit" [disabled]="!registerForm.form.valid">Register</ion-button>
+  </form>
+</div>
+

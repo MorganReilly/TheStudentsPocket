@@ -27,7 +27,7 @@ export class AppComponent {
     },
     {
       title: 'Module Creation Page',
-      url: '/create-moduleinfo',
+      url: '/create-subject',
       icon: 'create'
     }
   ];

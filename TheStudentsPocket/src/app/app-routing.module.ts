@@ -1,11 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
-import {RegisterComponent} from './register/register.component';
-import {SubjectOverviewComponent} from './subject-overview/subject-overview.component';
-import {CreateSubjectComponent} from './create-subject/create-subject.component';
-import {TimetableComponent} from './timetable/timetable.component';
-import {EditSubjectComponent} from './edit-subject/edit-subject.component';
-import {LoginComponent} from './login/login.component';
+import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
@@ -21,33 +15,38 @@ const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path: 'register',
-        component: RegisterComponent
-    },
-    {
         path: 'login',
-        component: LoginComponent
+        loadChildren: './login/login.module#LoginPageModule'
     },
     {
         path: 'subject-overview',
-        component: SubjectOverviewComponent,
+        loadChildren: './subject-overview/subject-overview.module#SubjectOverviewPageModule',
         canActivate: [AuthGuard]
     },
     {
-        path: 'create-moduleinfo',
-        component: CreateSubjectComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'timetable',
-        component: TimetableComponent,
+        path: 'grades',
+        loadChildren: './grades/grades.module#GradesPageModule',
         canActivate: [AuthGuard]
     },
     {
         path: 'edit-subject/:id',
-        component: EditSubjectComponent,
+        loadChildren: './edit-subject/edit-subject.module#EditSubjectPageModule',
         canActivate: [AuthGuard]
-    }
+    },
+    {
+        path: 'create-subject',
+        loadChildren: './create-subject/create-subject.module#CreateSubjectPageModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'timetable',
+        loadChildren: './timetable/timetable.module#TimetablePageModule',
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'register',
+        loadChildren: './register/register.module#RegisterPageModule'
+    },
 ];
 
 @NgModule({

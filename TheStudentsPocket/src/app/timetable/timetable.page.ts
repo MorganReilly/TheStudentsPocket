@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-timetable',
-  templateUrl: './timetable.component.html',
-  styleUrls: ['./timetable.component.scss']
+  templateUrl: './timetable.page.html',
+  styleUrls: ['./timetable.page.scss'],
 })
-export class TimetableComponent implements OnInit {
+export class TimetablePage implements OnInit {
 
   constructor() { }
 
