@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {ApiService} from '../services/api.service';
 import {MatDialog} from '@angular/material';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-create-subject',
@@ -10,7 +11,7 @@ import {MatDialog} from '@angular/material';
 })
 export class CreateSubjectPage implements OnInit {
 
-    constructor(private api: ApiService, public dialog: MatDialog) {
+    constructor(private api: ApiService, public dialog: MatDialog, private router: Router) {
     }
 
     /**
@@ -41,7 +42,7 @@ export class CreateSubjectPage implements OnInit {
 
     addSubject(form: NgForm) {
         this.api.addSubject(form.value.module_name, form.value.module_desc).subscribe(() => {
-            location.reload(true); // Reload the page
+            this.router.navigate(['/subject-overview']);
         });
         // Display form values to console
         console.log(form.value);

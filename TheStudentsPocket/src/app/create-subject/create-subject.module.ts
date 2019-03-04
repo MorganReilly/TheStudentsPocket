@@ -23,8 +23,7 @@ const routes: Routes = [
         MatDialogModule,
         MatInputModule,
     ],
-    declarations: [CreateSubjectPage],
-    entryComponents: [CreateSubjectPage]
+    declarations: [CreateSubjectPage]
 })
 export class CreateSubjectPageModule {
 }

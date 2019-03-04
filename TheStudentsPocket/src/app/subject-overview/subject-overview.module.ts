@@ -4,7 +4,6 @@ import {FormsModule} from '@angular/forms';
 import {RouterModule, Routes} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 import {SubjectOverviewPage} from './subject-overview.page';
-import {CreateSubjectPage} from '../create-subject/create-subject.page';
 
 import {
     MatButtonModule,
@@ -36,8 +35,7 @@ const routes: Routes = [
         MatFormFieldModule,
         MatInputModule,
     ],
-    declarations: [SubjectOverviewPage, CreateSubjectPage],
-    entryComponents: [CreateSubjectPage]
+    declarations: [SubjectOverviewPage],
 })
 export class SubjectOverviewPageModule {
 }
