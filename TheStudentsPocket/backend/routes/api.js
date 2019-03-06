@@ -6,6 +6,7 @@ let StudentInfo = require('../models/student_info');
 let SubjectInfo = require('../models/subject_info');
 let StudentLogin = require('../models/authentication');
 let Grade = require('../models/subject_grade_info');
+let activeSession; // User session variable
 
 /**
  * @title GET REQUEST, Middleware.
@@ -13,10 +14,12 @@ let Grade = require('../models/subject_grade_info');
  * @note executes immediately, passing results to callback.
  */
 router.get('/auth',  function (req, res) {
-    console.log(req.session);
-    console.log(req.session.student_id);
-    if (req.session.student_id && req.cookies.cookie_monster) {
-        console.log(req.session);
+    activeSession = req.session;
+    console.log(activeSession); // Log session details to server console
+    activeSession.student_id = req.session.student_id; // User student id number added to active session
+    console.log( activeSession.student_id); // Log student_id number from active session to console
+
+    if (activeSession.student_id && req.cookies.cookie_monster) {
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: true
         });
@@ -25,9 +28,8 @@ router.get('/auth',  function (req, res) {
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: false
         });
-      //  console.log('Authentication request fail!');
-    }
-
+        console.log('Authentication request fail!');
+    }// End if else
 });
 
 //====== Auth function for user login ===========================================================================
@@ -42,7 +44,7 @@ router.post('/auth', function (req, res) {
         if (err) res.send(err); //SQL Error handle
         //Complete! sendback
         if (data.success) { // Hand out cookie if auth is = true
-            //User has been authenticated set cookie:
+            //User has been authenticated set cookie & session.
             req.session.student_id = req.body.student_id;
             // sendback
             res.send(data);
@@ -114,8 +116,8 @@ router.delete('/students/:id', function (req, res) {
  * @desc gets all students info from the database.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
-router.get('/students/subjects/:student_id', function (req, res) {
-    SubjectInfo.getAllSubjectInfo(req.params.student_id, function (err, data) {
+router.get('/students/subjects/', function (req, res) {
+    SubjectInfo.getAllSubjectInfo(activeSession.student_id, function (err, data) {
         if (err) res.send(err);
         console.log(data);
         //Complete! sendback
@@ -128,9 +130,9 @@ router.get('/students/subjects/:student_id', function (req, res) {
  * @desc gets a subject from a students records by the subject ID
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
-router.get('/students/subjects/subject/:student_id&:id', function (req, res) {
+router.get('/students/subjects/subject/:id', function (req, res) {
     console.log(req.body.student_id, req.params.id);
-    SubjectInfo.getSubject(req.params.student_id, req.params.id, function (err, data) {
+    SubjectInfo.getSubject(activeSession.student_id, req.params.id, function (err, data) {
         if (err) res.send(err);
         console.log(data);
         //Complete! sendback
@@ -147,7 +149,7 @@ router.get('/students/subjects/subject/:student_id&:id', function (req, res) {
 router.post('/students/subjects/', function (req, res) {
     //New student object created from values passed in the body of the URL POST Request
     let new_subject = new SubjectInfo({
-        student_id: req.body.student_id,
+        student_id: activeSession.student_id,
         subject_name: req.body.subject_name,
         subject_desc: req.body.subject_desc
     });
@@ -230,7 +232,7 @@ router.get('/students/subjects/grades', function (req, res) {
 router.post('/students/subject/grades', function (req, res) {
     //New student object created from values passed in the body of the URL POST Request
     let new_grade = new Grade({
-        student_id: req.body.student_id,
+        student_id: activeSession.student_id,
         subject_name: req.body.subject_name,
         grade_type: req.body.grade_type,
         grade_weight: req.body.grade_weight,
