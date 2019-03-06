@@ -16,6 +16,7 @@ export class LoginPage implements OnInit {
     // Login function that makes a call to auth.service to check if the user exists in the database.
     login(form: NgForm  ) {
         this.auth.checkUserDetails(form.value.student_id, form.value.pin).subscribe(data => {
+            console.log(data);
             if (data.success) { // If true navigate to home page.
                 this.router.navigate(['/home']);
                 this.auth.setloggedIn(true); // Set client side logged in status to true.
@@ -25,7 +26,7 @@ export class LoginPage implements OnInit {
                 window.alert('Not the correct information');
             }
         });
-    }
+    }// End login function
 
     ngOnInit() {
     }

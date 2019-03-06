@@ -20,7 +20,6 @@ import {
     MatInputModule,
     MatListModule
 } from '@angular/material';
-
 import {CreateSubjectPage} from './create-subject/create-subject.page';
 
 
@@ -28,10 +27,6 @@ import {CreateSubjectPage} from './create-subject/create-subject.page';
     declarations: [
         AppComponent
     ],
-    /* Because MatDialog instantiates components at run-time, the Angular compiler
-    * needs extra information to create the necessary ComponentFactory for your dialog
-    * content component.
-    */
     imports: [
         BrowserModule,
         IonicModule.forRoot(),

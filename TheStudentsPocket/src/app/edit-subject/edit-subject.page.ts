@@ -23,7 +23,7 @@ export class EditSubjectPage implements OnInit {
      */
     onEditSubject(form: NgForm) {
         this.api.editSubject(this.subject[0].id, form.value.subject_name, form.value.subject_desc).subscribe(() => {
-           // this.router.navigate(['/subject-overview']); // Return the home
+            this.router.navigate(['/subject-overview']); // Return the home
         });
     }// End edit post
 

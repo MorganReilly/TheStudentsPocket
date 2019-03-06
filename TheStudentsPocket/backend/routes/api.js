@@ -44,17 +44,32 @@ router.post('/auth', function (req, res) {
         if (err) res.send(err); //SQL Error handle
         //Complete! sendback
         if (data.success) { // Hand out cookie if auth is = true
+            console.log(data.success);
             //User has been authenticated set cookie & session.
             req.session.student_id = req.body.student_id;
             // sendback
             res.send(data);
-        } else {//end if else
-            res.end();
+        } else {// end if else
+            res.send(data)// sendback
         } // End if else.
     });
 });
 
 // ====== START STUDENT_INFO ROUTES ==============================================================================
+/**
+ * @title GET REQUEST, getDetails()
+ * @desc gets a students info from the database by the student id number.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/student', function (req, res) {
+    StudentInfo.getDetails(activeSession.student_id, function (err, data) {
+        if (err) res.send(err);
+        console.log(data);
+        //Complete! sendback
+        res.send(data);
+    });
+}); // End GET REQUEST
+
 /**
  * @title GET REQUEST, getAllStudentInfo()
  * @desc gets all students info from the database.

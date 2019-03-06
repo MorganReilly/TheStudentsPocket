@@ -103,4 +103,8 @@ export class ApiService {
         };
         return this.http.put('http://localhost:8081/api/students/subjects/subject/' + id, subject);
     }// End edit subject function
+
+    getStudentDetails(): Observable<any> {
+        return this.http.get('http://localhost:8081/api/students/student');
+    }
 }// End class

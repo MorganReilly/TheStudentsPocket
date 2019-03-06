@@ -1,24 +1,63 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Register</ion-title>
+    </ion-toolbar>
 </ion-header>
+<ion-content>
+    <div class="content">
+        <ion-card>
+            <ion-card-header>
+                <ion-item>
+                    <ion-card-title>Register</ion-card-title>
+                </ion-item>
+            </ion-card-header>
 
-<div class="content">
-  <form class="register-form" (submit)="registerUser(registerForm)" #registerForm="ngForm">
-    <ion-input type="text" name="firstName" ngModel required="true" placeholder="First name"
-               #firstName="ngModel">
-    </ion-input>
-    <ion-input type="text" name="lastName" ngModel required="true" placeholder="Last name"
-               #lastName="ngModel"></ion-input>
-    <ion-input type="text" name="idNum" ngModel required="true" placeholder="Student ID"
-               #idNum="ngModel"></ion-input>
-    <ion-input type="password" name="pin" minlength="6" ngModel required="true"
-               placeholder="Please enter a pin" #pin="ngModel"></ion-input>
-    <ion-input type="password" name="confirmPin" minlength="6" ngModel required="true"
-               placeholder="Please re-enter your pin" #confirmPin="ngModel"></ion-input>
+            <ion-card-content>
+                <form class="register-form" (submit)="registerUser(registerForm)" #registerForm="ngForm">
 
-    <ion-button type="submit" [disabled]="!registerForm.form.valid">Register</ion-button>
-  </form>
-</div>
+                    <ion-item>
+                        <ion-label>First Name</ion-label>
+                        <ion-input slot="end" type="text" name="firstName" ngModel required="true"
+                                   placeholder="First name"
+                                   #firstName="ngModel">
+                        </ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Last Name</ion-label>
+                        <ion-input slot="end" type="text" name="lastName" ngModel required="true"
+                                   placeholder="Last name"
+                                   #lastName="ngModel"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Student ID</ion-label>
+                        <ion-input slot="end" type="text" name="idNum" ngModel required="true" placeholder="Student ID"
+                                   #idNum="ngModel"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Pin</ion-label>
+                        <ion-input slot="end" type="password" name="pin" minlength="6" ngModel required="true"
+                                   placeholder="Please enter a pin" #pin="ngModel"></ion-input>
+                    </ion-item>
+
+                    <ion-item>
+                        <ion-label>Confirm Pin</ion-label>
+                        <ion-input slot="end" type="password" name="confirmPin" minlength="6" ngModel required="true"
+                                   placeholder="Please re-enter your pin" #confirmPin="ngModel"></ion-input>
+                    </ion-item>
+
+                    <ion-card-content>
+                        <ion-button style="float: left" type="Login" [routerLink]="['/login']">Login
+                        </ion-button>
+
+                        <ion-button style="float: right" type="submit" [disabled]="!registerForm.form.valid">Register
+                        </ion-button>
+                    </ion-card-content>
+                </form>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
 

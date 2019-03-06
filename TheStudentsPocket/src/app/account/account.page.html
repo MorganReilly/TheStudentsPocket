@@ -1,0 +1,31 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Account Details</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="student && student.length > 0">
+    <div id="content" *ngFor="let stud of student">
+        <ion-card>
+            <ion-card-header>
+                <ion-item>
+                    <ion-card-title>Account Details</ion-card-title>
+                    <ion-button fill="outline" slot="end">Edit</ion-button>
+                </ion-item>
+            </ion-card-header>
+
+            <ion-card-content>
+                <ion-item>
+                    <ion-label>Name:</ion-label>
+                    <ion-text slot="end">{{stud.student_first_name + " " + stud.student_last_name}}</ion-text>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>Student Number:</ion-label>
+                    <ion-text slot="end">{{stud.student_id}}</ion-text>
+                </ion-item>
+
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
