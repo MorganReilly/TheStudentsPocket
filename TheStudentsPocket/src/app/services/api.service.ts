@@ -13,6 +13,10 @@ interface isLoggedIn {
     status: boolean;
 }
 
+interface isLogout{
+    status: boolean;
+}
+
 @Injectable({
     providedIn: 'root'
 })
@@ -106,5 +110,9 @@ export class ApiService {
 
     getStudentDetails(): Observable<any> {
         return this.http.get('http://localhost:8081/api/students/student');
+    }
+
+    logout(): Observable<isLogout> {
+        return this.http.get<isLogout>('http://localhost:8081/api/logout', {withCredentials: true});
     }
 }// End class

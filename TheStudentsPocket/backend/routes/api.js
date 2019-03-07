@@ -1,7 +1,6 @@
 // Variables
 let express = require('express');
 let router = express.Router();
-// Import StudentInfo model:
 let StudentInfo = require('../models/student_info');
 let SubjectInfo = require('../models/subject_info');
 let StudentLogin = require('../models/authentication');
@@ -18,12 +17,12 @@ router.get('/auth',  function (req, res) {
     console.log(activeSession); // Log session details to server console
     activeSession.student_id = req.session.student_id; // User student id number added to active session
     console.log( activeSession.student_id); // Log student_id number from active session to console
-
+    console.log('Cookie:', req.cookies.cookie_monster);
     if (activeSession.student_id && req.cookies.cookie_monster) {
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: true
         });
-    } else {
+    } else {1
         //Authentication request fail return false:
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: false
@@ -54,6 +53,21 @@ router.post('/auth', function (req, res) {
         } // End if else.
     });
 });
+
+/**
+ * @title GET REQUEST
+ * @desc request to log a user out and clear the cookie
+ */
+router.get('/logout', function(req, res){
+    if (activeSession.student_id && req.cookies.cookie_monster) {
+        res.clearCookie('cookie_monster'); // Clear cookie
+        res.send(true); // Logout request complete, return true
+        console.log('Successful Logout!');
+    } else {
+        res.send(false) // if request failed so return false
+    }// End if else
+});
+
 
 // ====== START STUDENT_INFO ROUTES ==============================================================================
 /**
