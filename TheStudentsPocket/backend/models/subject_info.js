@@ -17,11 +17,13 @@ let SubjectInfo = function (subject) {
 SubjectInfo.createSubject = function createSubject(newSubject, result) {
     sql.query('INSERT INTO subject_info set ?', newSubject, function (err, res) {
         if (err) {
+            // Log error & return it.
             console.log(err);
             result(err, null);
         } else {
-            console.log(res.insertId);
-            result(null, res.insertId);
+            // Log inserted subject information to console
+            console.log(res.newSubject);
+            result(null, res.newSubject);
         }//End if else
     });
 };

@@ -4,6 +4,7 @@
     npm install body-parser --save
     npm install mysql     : https://www.w3schools.com/nodejs/nodejs_mysql.asp
     npm install express-session --save
+    npm install -g nodemon : https://nodemon.io/
 */
 // Variables
 const express = require('express');
@@ -47,10 +48,7 @@ app.use('/api', api); //Use API
 
 /* Server listen, running on localhost:8081 */
 const server = app.listen(8081, function () {
-    const host = server.address().address;
-    const port = server.address().port;
-
-    console.log("Example app listening at http://%s:%s", host, port)
+    console.log('SERVER INFO:', server.address());
 });
 // Export app as a module.
 module.exports = app;

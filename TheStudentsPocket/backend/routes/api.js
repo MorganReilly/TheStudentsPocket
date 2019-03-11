@@ -7,6 +7,13 @@ let StudentLogin = require('../models/authentication');
 let Grade = require('../models/subject_grade_info');
 let activeSession; // User session variable
 
+router.get('/admin', function (req, res) {
+
+    console.log('Admin inbound request')
+    res.send('ADMIN BACKEND!')
+
+});
+
 /**
  * @title GET REQUEST, Middleware.
  * @desc check for logged-in users with a active session.
@@ -22,7 +29,7 @@ router.get('/auth',  function (req, res) {
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: true
         });
-    } else {1
+    } else {
         //Authentication request fail return false:
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
             status: false
@@ -160,7 +167,7 @@ router.get('/students/subjects/', function (req, res) {
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.get('/students/subjects/subject/:id', function (req, res) {
-    console.log(req.body.student_id, req.params.id);
+    console.log(activeSession.student_id, req.params.id);
     SubjectInfo.getSubject(activeSession.student_id, req.params.id, function (err, data) {
         if (err) res.send(err);
         console.log(data);
@@ -183,7 +190,7 @@ router.post('/students/subjects/', function (req, res) {
         subject_desc: req.body.subject_desc
     });
 
-    console.log(req.body.student_id, req.body.subject_name, req.body.subject_desc);
+    console.log(activeSession.student_id, req.body.subject_name, req.body.subject_desc);
 
     // Handle for null errors if any
     if (!new_subject.student_id || !new_subject.subject_name) {
@@ -295,4 +302,3 @@ router.delete('/students/subjects/grades/:id', function (req, res) {
 
 // Export router as a module.
 module.exports = router;
-

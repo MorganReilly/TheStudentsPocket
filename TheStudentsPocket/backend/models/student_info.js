@@ -33,8 +33,8 @@ StudentInfo.createStudent = function createStudent(newStudent, result) {
             console.log(err);
             result(err, null);
         } else {
-            console.log(res.insertId);
-            result(null, res.insertId);
+            console.log(res.newStudent);
+            result(null, res.newStudent);
         }//End if else
     });
 };

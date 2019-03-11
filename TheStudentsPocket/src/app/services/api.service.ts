@@ -13,7 +13,7 @@ interface isLoggedIn {
     status: boolean;
 }
 
-interface isLogout{
+interface isLogout {
     status: boolean;
 }
 
@@ -22,6 +22,10 @@ interface isLogout{
 })
 export class ApiService {
 
+    // Variables
+    // Server URL:
+    serverURL = 'http://ec2-34-240-242-186.eu-west-1.compute.amazonaws.com:8081';
+
     constructor(private http: HttpClient) {
 
     }
@@ -29,7 +33,7 @@ export class ApiService {
     // Function to check if the user has a logged in session:
     isLoggedIn(): Observable<isLoggedIn> {
         console.log('IS LOGGED IN REQUEST SENT TO SERVER!');
-        return this.http.get<isLoggedIn>('http://localhost:8081/api/auth', {withCredentials: true});
+        return this.http.get<isLoggedIn>(this.serverURL + '/api/auth', {withCredentials: true});
     }// End isLoggedIn function
 
     /**
@@ -46,7 +50,7 @@ export class ApiService {
         };
         console.log('Inside API: ', student);
         // POST data to backend handle:
-        return this.http.post('http://localhost:8081/api/students', student);
+        return this.http.post(this.serverURL + '/api/students', student);
     }// End add student
 
     /**
@@ -64,7 +68,7 @@ export class ApiService {
         console.log('Inside API: ' + subject);
 
         // PUT REQUEST to server:
-        return this.http.post('http://localhost:8081/api/students/subjects', subject);
+        return this.http.post(this.serverURL + '/api/students/subjects', subject);
     }// End addSubject function
 
     /**
@@ -72,7 +76,7 @@ export class ApiService {
      * @desc gets all the modules a student has entered into there account.
      */
     getAllSubjects(): Observable<any> {
-        return this.http.get('http://localhost:8081/api/students/subjects/');
+        return this.http.get(this.serverURL + '/api/students/subjects/');
     }// End getAllSubjects function
 
     /**
@@ -81,7 +85,7 @@ export class ApiService {
      * @note passes String, Server takes care of the request.
      */
     deleteSubject(id: number): Observable<any> {
-        return this.http.delete('http://localhost:8081/api/students/subjects/' + id);
+        return this.http.delete(this.serverURL + '/api/students/subjects/' + id);
     }// end delete subject function
 
     /**
@@ -90,7 +94,7 @@ export class ApiService {
      * @param id.
      */
     getSubject(id: number): Observable<any> {
-        return this.http.get('http://localhost:8081/api/students/subjects/subject/' + id);
+        return this.http.get(this.serverURL + '/api/students/subjects/subject/' + id);
     }// End get subject function
 
     /**
@@ -105,14 +109,14 @@ export class ApiService {
             subject_name: subject_name,
             subject_desc: subject_desc
         };
-        return this.http.put('http://localhost:8081/api/students/subjects/subject/' + id, subject);
+        return this.http.put(this.serverURL + '/api/students/subjects/subject/' + id, subject);
     }// End edit subject function
 
     getStudentDetails(): Observable<any> {
-        return this.http.get('http://localhost:8081/api/students/student');
+        return this.http.get(this.serverURL + '/api/students/student');
     }
 
     logout(): Observable<isLogout> {
-        return this.http.get<isLogout>('http://localhost:8081/api/logout', {withCredentials: true});
+        return this.http.get<isLogout>(this.serverURL + '/api/logout', {withCredentials: true});
     }
 }// End class

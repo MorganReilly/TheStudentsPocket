@@ -19,11 +19,13 @@ let GradeInfo = function (grade) {
 GradeInfo.createGrade = function (newGrade, result) {
     sql.query('INSERT INTO subject_grade_info set ?', newGrade, function (err, res) {
         if (err) {
+            // Log error & return it.
             console.log(err);
             result(err, null);
         } else {
-            console.log(res.insertId);
-            result(null, res.insertId);
+            // Log inserted grade information to console
+            console.log(res.newGrade);
+            result(null, res.newGrade);
         }//End if else
     });
 };

@@ -14,6 +14,9 @@ interface authData {
     providedIn: 'root'
 })
 export class AuthService {
+    // Variables
+    // Server URL:
+    serverURL = 'http://ec2-34-240-242-186.eu-west-1.compute.amazonaws.com:8081';
 
     private loggedInStatus = false; // Default set to false.
 
@@ -38,7 +41,7 @@ export class AuthService {
      */
     checkUserDetails(student_id, student_pin) {
         console.log(student_pin, student_id);
-        return this.http.post<authData>('http://localhost:8081/api/auth', {
+        return this.http.post<authData>(this.serverURL + '/api/auth', {
             student_id,
             student_pin
         }, {withCredentials: true});
