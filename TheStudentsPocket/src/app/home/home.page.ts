@@ -13,6 +13,10 @@ export class HomePage {
 
     }
 
+    /**
+     * @title Function for logout
+     * @desc makes a request to the api.logout function, if success the application with navigate to the login page
+     */
     onLogout() {
         this.api.logout().subscribe(data => {
             if (data) {

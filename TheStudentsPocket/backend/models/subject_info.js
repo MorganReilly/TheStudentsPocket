@@ -15,7 +15,7 @@ let SubjectInfo = function (subject) {
 
 // Create a new subject record for a student
 SubjectInfo.createSubject = function createSubject(newSubject, result) {
-    sql.query('INSERT INTO subject_info set ?', newSubject, function (err, res) {
+    sql.query('INSERT INTO subject_info set ?', newSubject,function (err, res) {
         if (err) {
             // Log error & return it.
             console.log(err);
@@ -55,8 +55,8 @@ SubjectInfo.getSubject = function (student_id, id, result) {
 };
 
 // Update a subject record
-SubjectInfo.update = function (updatedSubject, id, result) {
-    sql.query("UPDATE subject_info SET ? WHERE id = ?", [updatedSubject, id], function (err, res) {
+SubjectInfo.update = function (updatedSubject, student_id, id, result) {
+    sql.query("UPDATE subject_info SET ? WHERE student_id = ? AND id = ?", [updatedSubject, student_id, id], function (err, res) {
         if (err) {
             console.log(err);
             result(null, err);
@@ -68,8 +68,8 @@ SubjectInfo.update = function (updatedSubject, id, result) {
 };
 
 // Delete a subject from a students record in the database:
-SubjectInfo.delete = function (id, result) {
-    sql.query('DELETE from subject_info WHERE id = ?', [id], function (err, res) {
+SubjectInfo.delete = function (id, student_id, result) {
+    sql.query('DELETE from subject_info WHERE id = ? AND student_id= ?', [id, student_id], function (err, res) {
         if (err) {
             console.log(err);
             result(null, err);

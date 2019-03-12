@@ -19,11 +19,11 @@ router.get('/admin', function (req, res) {
  * @desc check for logged-in users with a active session.
  * @note executes immediately, passing results to callback.
  */
-router.get('/auth',  function (req, res) {
+router.get('/auth', function (req, res) {
     activeSession = req.session;
     console.log(activeSession); // Log session details to server console
     activeSession.student_id = req.session.student_id; // User student id number added to active session
-    console.log( activeSession.student_id); // Log student_id number from active session to console
+    console.log(activeSession.student_id); // Log student_id number from active session to console
     console.log('Cookie:', req.cookies.cookie_monster);
     if (activeSession.student_id && req.cookies.cookie_monster) {
         res.send(res.isLoggedIn = { //Respond to isLoggedIn interface with true as the user is logged-in
@@ -65,7 +65,7 @@ router.post('/auth', function (req, res) {
  * @title GET REQUEST
  * @desc request to log a user out and clear the cookie
  */
-router.get('/logout', function(req, res){
+router.get('/logout', function (req, res) {
     if (activeSession.student_id && req.cookies.cookie_monster) {
         res.clearCookie('cookie_monster'); // Clear cookie
         res.send(true); // Logout request complete, return true
@@ -84,10 +84,13 @@ router.get('/logout', function(req, res){
  */
 router.get('/students/student', function (req, res) {
     StudentInfo.getDetails(activeSession.student_id, function (err, data) {
-        if (err) res.send(err);
-        console.log(data);
-        //Complete! sendback
-        res.send(data);
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data);
+            //Complete! sendback
+            res.send(data);
+        }
     });
 }); // End GET REQUEST
 
@@ -98,10 +101,13 @@ router.get('/students/student', function (req, res) {
  */
 router.get('/students', function (req, res) {
     StudentInfo.getAllStudentsInfo(function (err, data) {
-        if (err) res.send(err);
-        console.log(data);
-        //Complete! sendback
-        res.send(data);
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data);
+            //Complete! sendback
+            res.send(data);
+        }// end if else
     });
 }); // End GET REQUEST
 
@@ -121,12 +127,15 @@ router.post('/students', function (req, res) {
 
     // Handle for null errors if any
     if (!new_student.student_id || !new_student.student_first_name || !new_student.student_last_name) {
-        res.status(400).send({error: true, message: 'Please provide all criteria!'});
+        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
     } else {
         StudentInfo.createStudent(new_student, function (err, data) {
-            if (err) res.send(err);
-            //Complete!
-            res.json(data); //sendback request
+            if (err) {
+                res.send({status: false, errorCode: err.code ,message: err.message});
+            } else {
+                //Complete!
+                res.json({status: true, errorCode: null, message: data}); //sendback request
+            }// end if else
         });
     }// End if else
 });//End POST REQUEST function
@@ -138,9 +147,12 @@ router.post('/students', function (req, res) {
  */
 router.delete('/students/:id', function (req, res) {
     StudentInfo.delete(req.params.student_id, function (err, data) {
-        if (err) res.send(err);
-        //Complete!
-        res.json({message: 'Student successfully deleted'}, data);
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete!
+            res.json({ message: 'Student successfully deleted' }, data);
+        }
     });
 });//End DELETE REQUEST
 
@@ -154,10 +166,13 @@ router.delete('/students/:id', function (req, res) {
  */
 router.get('/students/subjects/', function (req, res) {
     SubjectInfo.getAllSubjectInfo(activeSession.student_id, function (err, data) {
-        if (err) res.send(err);
-        console.log(data);
-        //Complete! sendback
-        res.send(data);
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data);
+            //Complete! sendback
+            res.send(data);
+        }// end if else
     });
 }); // End GET REQUEST
 
@@ -169,10 +184,13 @@ router.get('/students/subjects/', function (req, res) {
 router.get('/students/subjects/subject/:id', function (req, res) {
     console.log(activeSession.student_id, req.params.id);
     SubjectInfo.getSubject(activeSession.student_id, req.params.id, function (err, data) {
-        if (err) res.send(err);
-        console.log(data);
-        //Complete! sendback
-        res.send(data);
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete! sendback
+            console.log(data);
+            res.send(data);
+        }
     });
 }); // End GET REQUEST
 
@@ -194,12 +212,15 @@ router.post('/students/subjects/', function (req, res) {
 
     // Handle for null errors if any
     if (!new_subject.student_id || !new_subject.subject_name) {
-        res.status(400).send({error: true, message: 'Please provide all criteria!'});
+        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
     } else {
-        SubjectInfo.createSubject(new_subject, function (err, data) {
-            if (err) res.send(err);
-            //Complete!
-            res.json(data); //sendback request
+        SubjectInfo.createSubject(new_subject ,function (err, data) {
+            if (err) {
+                res.send({ status: false, errorCode: err.code, message: err.message });
+            } else {
+                //Complete!
+                res.send({ status: true, errorCode: null, message: data }); //sendback request
+            }
         });
     }// End if else
 });//End POST REQUEST function
@@ -219,12 +240,15 @@ router.put('/students/subjects/subject/:id', function (req, res) {
     console.log(updatedSubject);
     // Handle for null errors if any
     if (!updatedSubject.subject_name) {
-        res.status(400).send({error: true, message: 'Please provide a subject name'});
+        res.status(400).send({ error: true, message: 'Please provide a subject name' });
     } else {
-        SubjectInfo.update(updatedSubject, req.params.id, function (err, data) {
-            if (err) res.send(err);
-            //Complete!
-            res.json(data); //sendback request
+        SubjectInfo.update(updatedSubject, activeSession.student_id ,req.params.id, function (err, data) {
+            if (err) {
+                res.send({ status: false, message: err.message });
+            } else {
+                //Complete!
+                res.json({ status: true, message: data }); //sendback request
+            }
         });
     }// End if else
 });//End POST REQUEST function
@@ -236,10 +260,13 @@ router.put('/students/subjects/subject/:id', function (req, res) {
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.delete('/students/subjects/:id', function (req, res) {
-    SubjectInfo.delete(req.params.id, function (err, data) {
-        if (err) res.send(err);
-        //Complete!
-        res.json(data);
+    SubjectInfo.delete(req.params.id, activeSession.student_id, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete!
+            res.json(data);
+        }
     });
 });//End DELETE REQUEST
 
@@ -253,10 +280,13 @@ router.delete('/students/subjects/:id', function (req, res) {
  */
 router.get('/students/subjects/grades', function (req, res) {
     Grade.getAllGrades(function (err, data) {
-        if (err) res.send(err);
-        console.log(data);
-        //Complete! sendback
-        res.send(data);
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data);
+            //Complete! sendback
+            res.send(data);
+        }
     });
 }); // End GET REQUEST
 
@@ -277,12 +307,15 @@ router.post('/students/subject/grades', function (req, res) {
 
     // Handle for null errors if any
     if (!new_grade.student_id || !new_grade.subject_name || !new_grade.grade_type || !new_grade.grade_weight || !new_grade.curr_grade) {
-        res.status(400).send({error: true, message: 'Please provide all criteria!'});
+        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
     } else {
         SubjectInfo.createSubject(new_grade, function (err, data) {
-            if (err) res.send(err);
-            //Complete!
-            res.json(data); //sendback request
+            if (err) {
+                res.send(err);
+            } else {
+                //Complete!
+                res.json(data); //sendback request
+            }
         });
     }// End if else
 });//End POST REQUEST function
@@ -294,11 +327,15 @@ router.post('/students/subject/grades', function (req, res) {
  */
 router.delete('/students/subjects/grades/:id', function (req, res) {
     StudentInfo.delete(req.params.student_id, function (err, data) {
-        if (err) res.send(err);
-        //Complete!
-        res.json({message: 'Grade successfully deleted'}, data);
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete!
+            res.json({ message: 'Grade successfully deleted' }, data);
+        }
     });
 });//End DELETE REQUEST
 
 // Export router as a module.
 module.exports = router;
+

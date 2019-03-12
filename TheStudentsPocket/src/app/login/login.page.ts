@@ -10,11 +10,26 @@ import {AuthService} from '../services/auth.service';
 })
 export class LoginPage implements OnInit {
 
+    private errorMessage;
+
     constructor(private auth: AuthService, private router: Router) {
     }
 
+    /**
+     * @title Error message handle
+     * @desc Functions are used to set and get error message for this component.
+     */
+    setErrorMessage(error: String) {
+        this.errorMessage = error;
+    }
+
+    getErrorMessage() {
+        return this.errorMessage;
+    }
+    // End ======================================================================
+
     // Login function that makes a call to auth.service to check if the user exists in the database.
-    login(form: NgForm  ) {
+    login(form: NgForm) {
         this.auth.checkUserDetails(form.value.student_id, form.value.pin).subscribe(data => {
             console.log(data);
             if (data.success) { // If true navigate to home page.
@@ -23,8 +38,8 @@ export class LoginPage implements OnInit {
                 console.log('Success'); // Log success to console.
             } else {
                 // Display error if request comes back false:
-                window.alert('Not the correct information');
-            }
+                this.setErrorMessage('Not the correct information');
+            }// end if else
         });
     }// End login function
 

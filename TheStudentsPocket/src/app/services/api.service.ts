@@ -13,8 +13,16 @@ interface isLoggedIn {
     status: boolean;
 }
 
+// Interface used for isLogout Requests.
 interface isLogout {
     status: boolean;
+}
+
+// Interface is used for some query's passed to the databases.
+interface isProcessed {
+    status: boolean;
+    errorCode: string;
+    message: string;
 }
 
 @Injectable({
@@ -40,7 +48,7 @@ export class ApiService {
      * @title Adds a student.
      * @desc adds a student from the application.
      */
-    registerStudent(student_id: String, student_first_name: String, student_last_name: String, student_pin: Number): Observable<any> {
+    registerStudent(student_id: String, student_first_name: String, student_last_name: String, student_pin: Number): Observable<isProcessed> {
         // Setting values from form to a student object to be sent in the body of a url post request:
         const student: Student = {
             student_id: student_id,
@@ -50,7 +58,7 @@ export class ApiService {
         };
         console.log('Inside API: ', student);
         // POST data to backend handle:
-        return this.http.post(this.serverURL + '/api/students', student);
+        return this.http.post<isProcessed>(this.serverURL + '/api/students', student);
     }// End add student
 
     /**
@@ -59,7 +67,7 @@ export class ApiService {
      * @param subject_name
      * @param subject_desc
      */
-    addSubject(subject_name: String, subject_desc: String): Observable<any> {
+    addSubject(subject_name: String, subject_desc: String): Observable<isProcessed> {
         const subject: Subject = {
             subject_name: subject_name,
             subject_desc: subject_desc
@@ -68,7 +76,7 @@ export class ApiService {
         console.log('Inside API: ' + subject);
 
         // PUT REQUEST to server:
-        return this.http.post(this.serverURL + '/api/students/subjects', subject);
+        return this.http.post<isProcessed>(this.serverURL + '/api/students/subjects', subject);
     }// End addSubject function
 
     /**
@@ -104,18 +112,26 @@ export class ApiService {
      * @param subject_name
      * @param subject_desc
      */
-    editSubject(id: number, subject_name: String, subject_desc: String): Observable<any> {
+    editSubject(id: number, subject_name: String, subject_desc: String): Observable<isProcessed> {
         const subject: Subject = {
             subject_name: subject_name,
             subject_desc: subject_desc
         };
-        return this.http.put(this.serverURL + '/api/students/subjects/subject/' + id, subject);
+        return this.http.put<isProcessed>(this.serverURL + '/api/students/subjects/subject/' + id, subject);
     }// End edit subject function
 
+    /**
+     * @title Gets a students details.
+     * @desc gets a students details from the databases.
+     */
     getStudentDetails(): Observable<any> {
         return this.http.get(this.serverURL + '/api/students/student');
     }
 
+    /**
+     * @title Logout request
+     * @desc a request to the server to log the user out and destroy their session.
+     */
     logout(): Observable<isLogout> {
         return this.http.get<isLogout>(this.serverURL + '/api/logout', {withCredentials: true});
     }

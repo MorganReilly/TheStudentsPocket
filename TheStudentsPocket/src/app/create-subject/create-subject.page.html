@@ -9,6 +9,9 @@
 
 <ion-content padding>
     <form class="subject-form" (submit)="addSubject(subject_form)" #subject_form="ngForm">
+      <!-- Error message div -->
+      <mat-error *ngIf="module_name.invalid">{{getErrorMessage()}}</mat-error>
+
       <mat-form-field>
         <input matInput type="text" name="module_name" ngModel required="true" placeholder="Module Name"
                #module_name="ngModel">

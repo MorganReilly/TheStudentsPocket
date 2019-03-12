@@ -14,37 +14,34 @@
 
             <ion-card-content>
                 <form class="register-form" (submit)="registerUser(registerForm)" #registerForm="ngForm">
+                    <!-- Error message div -->
+                    <mat-error *ngIf="idNum.invalid">{{getErrorMessage()}}</mat-error>
 
                     <ion-item>
-                        <ion-label>First Name</ion-label>
-                        <ion-input slot="end" type="text" name="firstName" ngModel required="true"
+                        <ion-input type="text" name="firstName" ngModel required="true"
                                    placeholder="First name"
                                    #firstName="ngModel">
                         </ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label>Last Name</ion-label>
-                        <ion-input slot="end" type="text" name="lastName" ngModel required="true"
+                        <ion-input type="text" name="lastName" ngModel required="true"
                                    placeholder="Last name"
                                    #lastName="ngModel"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label>Student ID</ion-label>
-                        <ion-input slot="end" type="text" name="idNum" ngModel required="true" placeholder="Student ID"
+                        <ion-input type="text" name="idNum" ngModel required="true" placeholder="Student ID"
                                    #idNum="ngModel"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label>Pin</ion-label>
-                        <ion-input slot="end" type="password" name="pin" minlength="6" ngModel required="true"
+                        <ion-input type="password" name="pin" minlength="6" ngModel required="true"
                                    placeholder="Please enter a pin" #pin="ngModel"></ion-input>
                     </ion-item>
 
                     <ion-item>
-                        <ion-label>Confirm Pin</ion-label>
-                        <ion-input slot="end" type="password" name="confirmPin" minlength="6" ngModel required="true"
+                        <ion-input type="password" name="confirmPin" minlength="6" ngModel required="true"
                                    placeholder="Please re-enter your pin" #confirmPin="ngModel"></ion-input>
                     </ion-item>
 
