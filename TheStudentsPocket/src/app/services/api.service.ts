@@ -24,7 +24,7 @@ export class ApiService {
 
     // Variables
     // Server URL:
-    serverURL = 'http://ec2-34-240-242-186.eu-west-1.compute.amazonaws.com:8081';
+    serverURL = 'http://ec2-34-245-90-132.eu-west-1.compute.amazonaws.com:8081';
 
     constructor(private http: HttpClient) {
 
