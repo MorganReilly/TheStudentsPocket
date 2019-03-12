@@ -7,6 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="mainPageRender" *ngIf="grades.length > 0">
 
+  <div class="Container" *ngFor="let grade of grades">
+    <!-- Cards for displaying grade information -->
+    <!-- Retrieve from db and populate in single ion-card tag -->
+    <!-- Local array with complete grade object -->
+
+    <ion-card>
+      <ion-header>
+        <ion-card-title>{{grade.subject_name}}</ion-card-title>
+        <ion-card-subtitle>
+          Type: {{grade.grade_type}}
+        </ion-card-subtitle>
+        <ion-card-subtitle>
+          Weight: {{grade.grade_weight}}%
+        </ion-card-subtitle>
+        <ion-card-subtitle>
+          Current Grade: {{grade.curr_grade}}%
+        </ion-card-subtitle>
+      </ion-header>
+      <mat-card-actions class='buttons'>
+        <!-- Deletes by the subjects _id -->
+        <button mat-button color="warn">Delete Grade Info</button>
+        <!-- Edit subject information -->
+        <button mat-button color="primary">Edit Grade Info</button>
+      </mat-card-actions>
+    </ion-card>
+  </div>
 </ion-content>

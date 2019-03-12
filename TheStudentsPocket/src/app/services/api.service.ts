@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Student} from '../student.model';
 import {Subject} from '../subject.model';
+import {StudentGrade} from '../student_grade.model';
 
 /* @title APIService Class
  * @desc allows data to be passed to and from the backend where routes to databases are.
@@ -48,7 +49,8 @@ export class ApiService {
      * @title Adds a student.
      * @desc adds a student from the application.
      */
-    registerStudent(student_id: String, student_first_name: String, student_last_name: String, student_pin: Number): Observable<isProcessed> {
+    registerStudent(student_id: String, student_first_name: String, student_last_name: String, student_pin: Number):
+        Observable<isProcessed> {
         // Setting values from form to a student object to be sent in the body of a url post request:
         const student: Student = {
             student_id: student_id,
@@ -127,6 +129,36 @@ export class ApiService {
     getStudentDetails(): Observable<any> {
         return this.http.get(this.serverURL + '/api/students/student');
     }
+
+    /**
+     * @title Gets all grade info.
+     */
+    getAllGradeInfo(): Observable<any> {
+        return this.http.get(this.serverURL + '/api/students/subjects/grades');
+    }
+
+    /**
+     * @title EDIT a grade
+     * @desc updates a grade by the subject id.
+     * @param id
+     * @param subject_name
+     * @param grade_type
+     * @param grade_weight
+     * @param curr_grade
+     */
+    /*
+    //TODO! -- Figure out how to tackle properly
+    editGrade(id: number, subject_name: String, grade_type: String, grade_weight: number, curr_grade: number): Observable<isProcessed> {
+        const studentGrade: StudentGrade = {
+            subject_name: subject_name,
+            grade_type: grade_type,
+            grade_weight: grade_weight,
+            curr_grade: curr_grade
+        };
+        return this.http.put<isProcessed>(this.serverURL + '/api/students/subjects/grades' + id, studentGrade);
+    }// End edit subject function
+    */
+
 
     /**
      * @title Logout request
