@@ -1,14 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {AuthData} from "../auth-data";
 
 /* @title AuthService Class
  * @desc allows data to be passed to and from the backend where routes to databases are.
  */
-
-interface authData {
-    success: boolean;
-    message: string;
-}
 
 @Injectable({
     providedIn: 'root'
@@ -41,7 +37,7 @@ export class AuthService {
      */
     checkUserDetails(student_id, student_pin) {
         console.log(student_pin, student_id);
-        return this.http.post<authData>(this.serverURL + '/api/auth', {
+        return this.http.post<AuthData>(this.serverURL + '/api/auth', {
             student_id,
             student_pin
         }, {withCredentials: true});

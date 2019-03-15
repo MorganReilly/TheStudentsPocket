@@ -4,27 +4,15 @@ import {Observable} from 'rxjs';
 import {Student} from '../student.model';
 import {Subject} from '../subject.model';
 import {StudentGrade} from '../student_grade.model';
+import {IsLoggedIn} from "../is-logged-in";
+import {IsProcessed} from "../is-processed";
+import {Logout} from "../logout";
+
 
 /* @title APIService Class
  * @desc allows data to be passed to and from the backend where routes to databases are.
  */
 
-// Interface used for isLoggedIn requests.
-interface isLoggedIn {
-    status: boolean;
-}
-
-// Interface used for isLogout Requests.
-interface isLogout {
-    status: boolean;
-}
-
-// Interface is used for some query's passed to the databases.
-interface isProcessed {
-    status: boolean;
-    errorCode: string;
-    message: string;
-}
 
 @Injectable({
     providedIn: 'root'
@@ -40,9 +28,9 @@ export class ApiService {
     }
 
     // Function to check if the user has a logged in session:
-    isLoggedIn(): Observable<isLoggedIn> {
+    isLoggedIn(): Observable<IsLoggedIn> {
         console.log('IS LOGGED IN REQUEST SENT TO SERVER!');
-        return this.http.get<isLoggedIn>(this.serverURL + '/api/auth', {withCredentials: true});
+        return this.http.get<IsLoggedIn>(this.serverURL + '/api/auth', {withCredentials: true});
     }// End isLoggedIn function
 
     /**
@@ -50,7 +38,7 @@ export class ApiService {
      * @desc adds a student from the application.
      */
     registerStudent(student_id: String, student_first_name: String, student_last_name: String, student_pin: Number):
-        Observable<isProcessed> {
+        Observable<IsProcessed> {
         // Setting values from form to a student object to be sent in the body of a url post request:
         const student: Student = {
             student_id: student_id,
@@ -60,7 +48,7 @@ export class ApiService {
         };
         console.log('Inside API: ', student);
         // POST data to backend handle:
-        return this.http.post<isProcessed>(this.serverURL + '/api/students', student);
+        return this.http.post<IsProcessed>(this.serverURL + '/api/students', student);
     }// End add student
 
     /**
@@ -69,7 +57,7 @@ export class ApiService {
      * @param subject_name
      * @param subject_desc
      */
-    addSubject(subject_name: String, subject_desc: String): Observable<isProcessed> {
+    addSubject(subject_name: String, subject_desc: String): Observable<IsProcessed> {
         const subject: Subject = {
             subject_name: subject_name,
             subject_desc: subject_desc
@@ -78,7 +66,7 @@ export class ApiService {
         console.log('Inside API: ' + subject);
 
         // PUT REQUEST to server:
-        return this.http.post<isProcessed>(this.serverURL + '/api/students/subjects', subject);
+        return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects', subject);
     }// End addSubject function
 
     /**
@@ -114,12 +102,12 @@ export class ApiService {
      * @param subject_name
      * @param subject_desc
      */
-    editSubject(id: number, subject_name: String, subject_desc: String): Observable<isProcessed> {
+    editSubject(id: number, subject_name: String, subject_desc: String): Observable<IsProcessed> {
         const subject: Subject = {
             subject_name: subject_name,
             subject_desc: subject_desc
         };
-        return this.http.put<isProcessed>(this.serverURL + '/api/students/subjects/subject/' + id, subject);
+        return this.http.put<IsProcessed>(this.serverURL + '/api/students/subjects/subject/' + id, subject);
     }// End edit subject function
 
     /**
@@ -164,7 +152,7 @@ export class ApiService {
      * @title Logout request
      * @desc a request to the server to log the user out and destroy their session.
      */
-    logout(): Observable<isLogout> {
-        return this.http.get<isLogout>(this.serverURL + '/api/logout', {withCredentials: true});
+    logout(): Observable<Logout> {
+        return this.http.get<Logout>(this.serverURL + '/api/logout', {withCredentials: true});
     }
 }// End class
