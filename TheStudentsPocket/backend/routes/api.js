@@ -265,7 +265,7 @@ router.delete('/students/subjects/:id', function (req, res) {
             res.send(err);
         } else {
             //Complete!
-            res.json(data);
+            res.send(data);
         }
     });
 });//End DELETE REQUEST
@@ -375,12 +375,12 @@ router.get('/students/subjects/grade/:id', function (req, res) {
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.delete('/students/subjects/grades/:id', function (req, res) {
-    Grade.delete(req.params.student_id, function (err, data) {
+    Grade.delete(activeSession.student_id, req.params.id, function (err, data) {
         if (err) {
             res.send(err);
         } else {
             //Complete!
-            res.json({ message: 'Grade successfully deleted' }, data);
+            res.status({ message: 'Grade successfully deleted' }, data);
         }
     });
 });//End DELETE REQUEST

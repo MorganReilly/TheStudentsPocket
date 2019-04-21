@@ -42,9 +42,6 @@ GradeInfo.getAllGrades = function (student_id,result) {
     });
 };
 
-//Update grade information
-//TODO
-
 // Get a grade by its ID:
 GradeInfo.getGrade = function (student_id, id, result) {
     sql.query('SELECT * from subject_grade_info where student_id = ? AND id = ? ', [student_id, id], function (err, res) {
@@ -59,8 +56,8 @@ GradeInfo.getGrade = function (student_id, id, result) {
 };
 
 // Delete a student record from the database:
-GradeInfo.delete = function (id, result) {
-    sql.query('DELETE FROM subject_grade_info WHERE id = ?', [id], function (err, res) {
+GradeInfo.delete = function (student_id, id, result) {
+    sql.query('DELETE from subject_grade_info where student_id = ? AND id = ? ', [student_id, id], function (err, res) {
         if (err) {
             console.log(err);
             result(null, err);

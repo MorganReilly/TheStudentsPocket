@@ -149,6 +149,15 @@ export class ApiService {
     }
 
     /**
+     * @title Deletes a subject
+     * @desc deletes a selected subject from the database.
+     * @note passes String, Server takes care of the request.
+     */
+    deleteGrade(id: number): Observable<any> {
+        return this.http.delete(this.serverURL + '/api/students/subjects/grades/' + id);
+    }// end delete subject function
+
+    /**
      * @title Logout request
      * @desc a request to the server to log the user out and destroy their session.
      */
