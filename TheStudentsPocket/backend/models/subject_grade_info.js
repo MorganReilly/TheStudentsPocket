@@ -18,11 +18,10 @@ let GradeInfo = function (grade) {
 // Create a new subject record for a student
 GradeInfo.createGrade = function (newGrade, result) {
     sql.query('INSERT INTO subject_grade_info set ?', newGrade, function (err, res) {
-        if (err) {
-            // Log error & return it.
+        if (err.errno == 1062) { // SQL 'ER_DUP_ENTRY'
             console.log(err);
-            result(err, null);
-        } else {
+            result(err, null)
+        } else { // else send the result
             // Log inserted grade information to console
             console.log(res.newGrade);
             result(null, res.newGrade);
@@ -31,8 +30,24 @@ GradeInfo.createGrade = function (newGrade, result) {
 };
 
 // Get all subject information:
-GradeInfo.getAllGrades = function (result) {
-    sql.query('SELECT * from subject_grade_info', function (err, res) {
+GradeInfo.getAllGrades = function (student_id,result) {
+    sql.query('SELECT * from subject_grade_info where student_id = ?', [student_id], function (err, res) {
+        if (err) {
+            console.log(err);
+            result(null, err);
+        } else {
+            console.log(res);
+            result(null, res);
+        }
+    });
+};
+
+//Update grade information
+//TODO
+
+// Get a grade by its ID:
+GradeInfo.getGrade = function (student_id, id, result) {
+    sql.query('SELECT * from subject_grade_info where student_id = ? AND id = ? ', [student_id, id], function (err, res) {
         if (err) {
             console.log(err);
             result(null, err);
@@ -46,11 +61,24 @@ GradeInfo.getAllGrades = function (result) {
 // Delete a student record from the database:
 GradeInfo.delete = function (id, result) {
     sql.query('DELETE FROM subject_grade_info WHERE id = ?', [id], function (err, res) {
-        if(err){
+        if (err) {
             console.log(err);
             result(null, err);
-        }else {
+        } else {
             result(null, res)
+        }
+    });
+};
+
+// Update a subject record
+GradeInfo.update = function (updatedGrade, student_id, id, result) {
+    sql.query("UPDATE subject_grade_info SET ? WHERE student_id = ? AND id = ?", [updatedGrade, student_id, id], function (err, res) {
+        if (err) {
+            console.log(err);
+            result(null, err);
+        } else {
+            console.log(res);
+            result(null, res);
         }
     });
 };

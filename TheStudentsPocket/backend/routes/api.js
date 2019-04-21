@@ -279,7 +279,7 @@ router.delete('/students/subjects/:id', function (req, res) {
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.get('/students/subjects/grades', function (req, res) {
-    Grade.getAllGrades(function (err, data) {
+    Grade.getAllGrades(activeSession.student_id, function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -291,11 +291,11 @@ router.get('/students/subjects/grades', function (req, res) {
 }); // End GET REQUEST
 
 /**
- * @title CREATE SUBJECT REQUEST.
+ * @title CREATE GRADE REQUEST.
  * @desc posts the created student object to the database.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
-router.post('/students/subject/grades', function (req, res) {
+router.post('/students/subjects/grades', function (req, res) {
     //New student object created from values passed in the body of the URL POST Request
     let new_grade = new Grade({
         student_id: activeSession.student_id,
@@ -309,7 +309,7 @@ router.post('/students/subject/grades', function (req, res) {
     if (!new_grade.student_id || !new_grade.subject_name || !new_grade.grade_type || !new_grade.grade_weight || !new_grade.curr_grade) {
         res.status(400).send({ error: true, message: 'Please provide all criteria!' });
     } else {
-        SubjectInfo.createSubject(new_grade, function (err, data) {
+        Grade.createGrade(new_grade, function (err, data) {
             if (err) {
                 res.send(err);
             } else {
@@ -321,12 +321,61 @@ router.post('/students/subject/grades', function (req, res) {
 });//End POST REQUEST function
 
 /**
+ * @title PUT REQUEST, UPDATE().
+ * @desc finds a subject by its id number in the database and updates it.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.put('/students/subjects/grades/:id', function (req, res) {
+    //New student object created from values passed in the body of the URL POST Request
+    let updatedGrade = {
+        subject_name: req.body.subject_name,
+        grade_type: req.body.grade_type,
+        grade_weight: req.body.grade_weight,
+        curr_grade: req.body.curr_grade
+    };
+
+    console.log(updatedGrade);
+    // Handle for null errors if any
+    if (!updatedGrade.subject_name) {
+        res.status(400).send({ error: true, message: 'Please provide a grade name' });
+    } else {
+        Grade.update(updatedGrade, activeSession.student_id ,req.params.id, function (err, data) {
+            if (err) {
+                res.send({ status: false, message: err.message });
+            } else {
+                //Complete!
+                res.json({ status: true, message: data }); //sendback request
+            }
+        });
+    }// End if else
+});//End POST REQUEST function
+
+
+/**
+ * @title GET GRADE REQUEST, getGrade()
+ * @desc gets a grade from a students records by the grade ID
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/subjects/grade/:id', function (req, res) {
+    console.log(activeSession.student_id, req.params.id);
+    Grade.getGrade(activeSession.student_id, req.params.id, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete! sendback
+            console.log(data);
+            res.send(data);
+        }
+    });
+}); // End GET REQUEST
+
+/**
  * @title DELETE REQUEST
  * @desc deletes a subject by its id number from the database.
  * @note executes immediately, passing results to callback. Logs the data to the server console.
  */
 router.delete('/students/subjects/grades/:id', function (req, res) {
-    StudentInfo.delete(req.params.student_id, function (err, data) {
+    Grade.delete(req.params.student_id, function (err, data) {
         if (err) {
             res.send(err);
         } else {
@@ -335,6 +384,7 @@ router.delete('/students/subjects/grades/:id', function (req, res) {
         }
     });
 });//End DELETE REQUEST
+
 
 // Export router as a module.
 module.exports = router;

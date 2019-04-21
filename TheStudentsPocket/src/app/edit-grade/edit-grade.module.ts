@@ -6,6 +6,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {EditGradePage} from './edit-grade.page';
+import {MatButtonModule, MatCardModule, MatDialogModule, MatDividerModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 const routes: Routes = [
     {
@@ -19,7 +20,13 @@ const routes: Routes = [
         CommonModule,
         FormsModule,
         IonicModule,
-        RouterModule.forChild(routes)
+        RouterModule.forChild(routes),
+        MatButtonModule,
+        MatCardModule,
+        MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatInputModule,
     ],
     declarations: [EditGradePage]
 })

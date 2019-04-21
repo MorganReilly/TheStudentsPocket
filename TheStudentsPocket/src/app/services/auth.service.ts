@@ -12,7 +12,7 @@ import {AuthData} from "../auth-data";
 export class AuthService {
     // Variables
     // Server URL:
-    serverURL = 'http://ec2-34-245-90-132.eu-west-1.compute.amazonaws.com:8081';
+    serverURL = 'http://ec2-54-72-80-41.eu-west-1.compute.amazonaws.com:8081';
 
     private loggedInStatus = false; // Default set to false.
 

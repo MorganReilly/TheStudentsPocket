@@ -4,9 +4,9 @@ import {Observable} from 'rxjs';
 import {Student} from '../student.model';
 import {Subject} from '../subject.model';
 import {StudentGrade} from '../student_grade.model';
-import {IsLoggedIn} from "../is-logged-in";
-import {IsProcessed} from "../is-processed";
-import {Logout} from "../logout";
+import {IsLoggedIn} from '../is-logged-in';
+import {IsProcessed} from '../is-processed';
+import {Logout} from '../logout';
 
 
 /* @title APIService Class
@@ -21,7 +21,7 @@ export class ApiService {
 
     // Variables
     // Server URL:
-    serverURL = 'http://ec2-34-245-90-132.eu-west-1.compute.amazonaws.com:8081';
+    serverURL = 'http://ec2-54-72-80-41.eu-west-1.compute.amazonaws.com:8081';
 
     constructor(private http: HttpClient) {
 
@@ -134,19 +134,19 @@ export class ApiService {
      * @param grade_weight
      * @param curr_grade
      */
-    /*
-    //TODO! -- Figure out how to tackle properly
-    editGrade(id: number, subject_name: String, grade_type: String, grade_weight: number, curr_grade: number): Observable<isProcessed> {
+    editGrade(id: number, subject_name: String, grade_type: String, grade_weight: number, curr_grade: number): Observable<IsProcessed> {
         const studentGrade: StudentGrade = {
             subject_name: subject_name,
             grade_type: grade_type,
             grade_weight: grade_weight,
             curr_grade: curr_grade
         };
-        return this.http.put<isProcessed>(this.serverURL + '/api/students/subjects/grades' + id, studentGrade);
+        return this.http.put<IsProcessed>(this.serverURL + '/api/students/subjects/grades/' + id, studentGrade);
     }// End edit subject function
-    */
 
+    getGrade(id: number): Observable<any> {
+        return this.http.get(this.serverURL + '/api/students/subjects/grade/' + id);
+    }
 
     /**
      * @title Logout request
