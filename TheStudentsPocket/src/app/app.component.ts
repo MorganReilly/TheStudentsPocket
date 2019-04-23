@@ -21,7 +21,7 @@ export class AppComponent {
             icon: 'list'
         },
         {
-            title: 'Module Creation Page',
+            title: 'Module Creation',
             url: '/create-subject',
             icon: 'create'
         },
@@ -29,6 +29,11 @@ export class AppComponent {
             title: 'Grade Overview',
             url: '/grades',
             icon: 'list'
+        },
+        {
+            title: 'Grade Creation',
+            url: '/create-entry',
+            icon: 'create'
         },
         {
             title: 'Timetable',
