@@ -55,7 +55,7 @@ const routes: Routes = [
     {
         path: 'edit-grade/:id',
         loadChildren: './edit-grade/edit-grade.module#EditGradePageModule',
-        // canActivate: [AuthGuard]
+        canActivate: [AuthGuard]
     },
 
 

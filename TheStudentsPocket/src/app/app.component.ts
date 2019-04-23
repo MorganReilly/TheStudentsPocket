@@ -33,7 +33,7 @@ export class AppComponent {
         {
             title: 'Timetable',
             url: '/timetable',
-            icon: 'list'
+            icon: 'clock'
         }
     ];
 
