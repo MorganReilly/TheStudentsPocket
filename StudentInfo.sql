@@ -40,9 +40,8 @@ create table subject_timetable_info
 	student_id VARCHAR(10) NOT NULL,
 	subject_name varchar(50) NOT NULL,
 	subject_room varchar(10) NOT NULL,	
-	subject_start decimal(4,2) NOT NULL,
-	subject_end decimal(4,2) NOT NULL,
-	subject_day integer(1) NOT NULL,	
+	subject_start DATETIME NOT NULL,
+	subject_end DATETIME NOT NULL,	
 	
 	foreign key (student_id) references student_info(student_id)	
 ) Engine = INNODB;
@@ -50,26 +49,29 @@ create table subject_timetable_info
 
 #student_info Tests
 describe student_info;
-insert into student_info(student_id, student_first_name, student_last_name, student_pin) values ("G00303598", "Morgan", "Reilly", 999999);
-insert into student_info(student_id, student_first_name, student_last_name, student_pin) values ("G00346889", "Cathal", "Butler", 888888);
+insert into student_info(student_id, student_first_name, student_last_name, student_pin) values 
+("G00303598", "Morgan", "Reilly", 999999),
+("G00346889", "Cathal", "Butler", 888888);
 select * from student_info;
 
 #subject_info Tests
 describe subject_info;
-insert into subject_info (student_id, subject_name, subject_desc) values ("G00303598", "OOP", "Project + MCQ");
-insert into subject_info (student_id, subject_name, subject_desc) values ("G00303598", "Data Centric", "Project + MCQ");
-insert into subject_info (student_id, subject_name, subject_desc) values ("G00346889", "OOP", "Project work");
-insert into subject_info (student_id, subject_name, subject_desc) values ("G00346889", "Data Centric", "Project work");
+insert into subject_info (student_id, subject_name, subject_desc) values 
+ ("G00303598", "OOP", "Project + MCQ"),
+ ("G00303598", "Data Centric", "Project + MCQ"),
+ ("G00346889", "OOP", "Project work"),
+ ("G00346889", "Data Centric", "Project work");
 select * from subject_info;
 
 #Subject_Grade_Info Tests
 describe subject_grade_info;
-insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values ("G00303598", "OOP", "Project", 50, 0);
-insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values ("G00303598", "OOP", "MCQ1", 25, 0);
-insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values ("G00303598", "OOP", "MCQ2", 25, 0);
-insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values ("G00346889", "OOP", "Project", 50, 0);
-insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values ("G00346889", "OOP", "MCQ1", 25, 0);
-insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values ("G00346889", "OOP", "MCQ2", 25, 0);
+insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values
+ ("G00303598", "OOP", "Project", 50, 0),
+ ("G00303598", "OOP", "MCQ1", 25, 0),
+ ("G00303598", "OOP", "MCQ2", 25, 0),
+ ("G00346889", "OOP", "Project", 50, 0),
+ ("G00346889", "OOP", "MCQ1", 25, 0),
+ ("G00346889", "OOP", "MCQ2", 25, 0);
 select * from subject_grade_info;
 
 #Constraint test
@@ -78,13 +80,15 @@ insert into subject_grade_info (student_id, subject_name, grade_type, grade_weig
 #subject_timetable_info tests
 describe subject_timetable_info;
 
-insert into subject_timetable_info (student_id, subject_name, subject_room, subject_start,subject_end, subject_day) values ("G00303598", "OOP", "CR8", 13.00, 15.00, 1);
-insert into subject_timetable_info (student_id, subject_name, subject_room, subject_start,subject_end, subject_day) values ("G00303598", "OOP", "970", 15.00, 17.00, 4);
-insert into subject_timetable_info (student_id, subject_name, subject_room, subject_start,subject_end, subject_day) values ("G00346889", "OOP", "CR8", 13.00, 15.00, 1);
-insert into subject_timetable_info (student_id, subject_name, subject_room, subject_start,subject_end, subject_day) values ("G00346889", "OOP", "970", 15.00, 18.00, 4);
+insert into subject_timetable_info (student_id, subject_name, subject_room, subject_start,subject_end) values 
+("G00303598", "OOP", "CR8", '2019-03-22 10:00:00', '2019-03-22 13:00:00'),
+("G00303598", "OOP", "970", '2019-03-23 12:30:00', '2019-03-22 14:00:00'),
+("G00346889", "OOP", "CR8", '2019-03-24 10:10:00', '2019-03-22 11:00:00'),
+("G00346889", "OOP", "970", '2019-03-25 10:00:00', '2019-03-22 14:00:00');
 
 select * from subject_timetable_info;
 
+# Some of these tests are outdated, please be aware of this.
 #inner join tests
 #Case: 1 > Show student id, first name, subject name, grade type, grade weight where id = G00346889
 select sgi.student_id, si.student_first_name, sgi.subject_name, sgi.grade_type, sgi.grade_weight from subject_grade_info sgi inner join student_info si on sgi.student_id = si.student_id where si.student_id = "G00346889";

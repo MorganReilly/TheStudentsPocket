@@ -32,9 +32,9 @@ export class CreateGradePage implements OnInit {
 
 
     addGrade(form: NgForm) {
-        this.api.addGrade(form.value.module_name, form.value.module_desc).subscribe(data => {
+        this.api.addGrade(form.value.subject_name, form.value.grade_type, form.value.grade_weight, form.value.curr_grade).subscribe(data => {
             if (data.status) {
-                this.router.navigate(['/subject-overview']);
+                this.router.navigate(['/grades']);
             } else if (data.errorCode === 'ER_DUP_ENTRY') {
                 this.setErrorMessage('This subject already exists in your records');
             } else {
