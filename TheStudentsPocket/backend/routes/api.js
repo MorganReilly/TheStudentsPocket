@@ -5,6 +5,7 @@ let StudentInfo = require('../models/student_info');
 let SubjectInfo = require('../models/subject_info');
 let StudentLogin = require('../models/authentication');
 let Grade = require('../models/subject_grade_info');
+let Timetable = require('../models/subject_timetable_info');
 let activeSession; // User session variable
 
 router.get('/admin', function (req, res) {
@@ -306,15 +307,15 @@ router.post('/students/subjects/grades', function (req, res) {
     });
 
     // Handle for null errors if any
-    if (!new_grade.student_id || !new_grade.subject_name || !new_grade.grade_type || !new_grade.grade_weight || !new_grade.curr_grade) {
+    if (!new_grade.student_id || !new_grade.subject_name) {
         res.status(400).send({ error: true, message: 'Please provide all criteria!' });
     } else {
         Grade.createGrade(new_grade, function (err, data) {
             if (err) {
-                res.send(err);
+                res.send({ status: false, message: err.message });
             } else {
                 //Complete!
-                res.json(data); //sendback request
+                res.json({ status: true, message: data }); //sendback request
             }
         });
     }// End if else
@@ -385,7 +386,120 @@ router.delete('/students/subjects/grades/:id', function (req, res) {
     });
 });//End DELETE REQUEST
 
+// ====== END SUBJECT_GRADE ROUTES ================================================================================
+// ====== START SUBJECT_TIMETABLE_INFO ROUTES =====================================================================
+
+/**
+ * @title GET REQUEST, getAllEntrys()
+ * @desc gets all timetable entrys info from the database.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/subjects/timetable', function (req, res) {
+    Timetable.getAllEntrys(activeSession.student_id, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            console.log(data);
+            //Complete! sendback
+            res.send(data);
+        }
+    });
+}); // End GET REQUEST
+
+/**
+ * @title CREATE TIMETABLE REQUEST.
+ * @desc posts the created student object to the database.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.post('/students/subjects/timetable', function (req, res) {
+    //New student object created from values passed in the body of the URL POST Request
+    let new_entry = new Timetable({
+        student_id: activeSession.student_id,
+        subject_name: req.body.subject_name,
+        subject_room: req.body.subject_room,
+        subject_day: req.body.subject_day,
+        subject_period: req.body.subject_period
+    });
+
+    // Handle for null errors if any
+    if (!new_entry.student_id || !new_entry.subject_name) {
+        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
+    } else {
+        Timetable.createEntry(new_entry, function (err, data) {
+            if (err) {
+                res.send({ status: false, message: err.message });
+            } else {
+                //Complete!
+                res.json({ status: true, message: data }); //sendback request
+            }
+        });
+    }// End if else
+});//End POST REQUEST function
+
+/**
+ * @title PUT REQUEST, UPDATE().
+ * @desc finds a subject by its id number in the database and updates it.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.put('/students/subjects/timetable/:id', function (req, res) {
+    //New student object created from values passed in the body of the URL POST Request
+    let updatedTimetableEntry = {
+        subject_name: req.body.subject_name,
+        subject_room: req.body.subject_room,
+        subject_day: req.body.subject_day,
+        subject_period: req.body.subject_period
+    };
+
+    console.log(updatedTimetableEntry);
+    // Handle for null errors if any
+    if (!updatedTimetableEntry.subject_name) {
+        res.status(400).send({ error: true, message: 'Please provide a grade name' });
+    } else {
+        Timetable.update(updatedTimetableEntry, activeSession.student_id ,req.params.id, function (err, data) {
+            if (err) {
+                res.send({ status: false, message: err.message });
+            } else {
+                //Complete!
+                res.json({ status: true, message: data }); //sendback request
+            }
+        });
+    }// End if else
+});//End POST REQUEST function
+
+
+/**
+ * @title GET TIMETABLE ENTRY REQUEST, getGrade()
+ * @desc gets a grade from a students records by the grade ID
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/subjects/timetable/:id', function (req, res) {
+    console.log(activeSession.student_id, req.params.id);
+    Timetable.getEntry(activeSession.student_id, req.params.id, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete! sendback
+            console.log(data);
+            res.send(data);
+        }
+    });
+}); // End GET REQUEST
+
+/**
+ * @title DELETE REQUEST
+ * @desc deletes a subject by its id number from the database.
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.delete('/students/subjects/timetable/:id', function (req, res) {
+    Timetable.delete(activeSession.student_id, req.params.id, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete!
+            res.send(data);
+        }
+    });
+});//End DELETE REQUEST
 
 // Export router as a module.
 module.exports = router;
-

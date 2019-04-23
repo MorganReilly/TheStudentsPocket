@@ -186,6 +186,14 @@ export class ApiService {
     }// End addGrade function
 
     /**
+     * @title Gets all timetable entry.
+     * @desc gets all  timetable entry a student has entered into there account.
+     */
+    getAllTimetableEntrys(): Observable<any> {
+        return this.http.get(this.serverURL + '/api/students/subjects/timetable');
+    }// End getAllTimetableEntry function
+
+    /**
      * @title Logout request
      * @desc a request to the server to log the user out and destroy their session.
      */

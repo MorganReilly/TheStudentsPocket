@@ -12,12 +12,7 @@ export class SubjectOverviewPage implements OnInit {
     // Variables
     modules: any = [];
 
-    constructor(private api: ApiService, private createCon: CreateSubjectPage) {
-    }
-
-    // Function to open create a subject disalog box
-    openDialog() {
-        this.createCon.openDialog();
+    constructor(private api: ApiService) {
     }
 
     // Delete subject by its id number

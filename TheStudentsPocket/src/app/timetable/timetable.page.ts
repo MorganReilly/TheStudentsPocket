@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ApiService} from "../services/api.service";
 
 @Component({
   selector: 'app-timetable',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TimetablePage implements OnInit {
 
-  constructor() { }
+  // Variables
+  timetableEntrys: any = [];
+
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.getAllTimetableEntrys().subscribe(data => {
+      this.timetableEntrys = data;
+      console.log(data);
+    });
   }
 
 }

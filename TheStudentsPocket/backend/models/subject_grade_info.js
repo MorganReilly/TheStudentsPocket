@@ -18,7 +18,7 @@ let GradeInfo = function (grade) {
 // Create a new subject record for a student
 GradeInfo.createGrade = function (newGrade, result) {
     sql.query('INSERT INTO subject_grade_info set ?', newGrade, function (err, res) {
-        if (err.errno == 1062) { // SQL 'ER_DUP_ENTRY'
+        if (err) {
             console.log(err);
             result(err, null)
         } else { // else send the result
