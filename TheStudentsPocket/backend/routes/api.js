@@ -380,7 +380,7 @@ router.delete('/students/subjects/grades/:id', function (req, res) {
             res.send(err);
         } else {
             //Complete!
-            res.status({ message: 'Grade successfully deleted' }, data);
+            res.send(data);
         }
     });
 });//End DELETE REQUEST
