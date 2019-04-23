@@ -26,8 +26,7 @@ Create Table subject_grade_info
 	id integer(3) zerofill not null auto_increment PRIMARY KEY,
 	student_id VARCHAR(10) NOT NULL,
 	subject_name varchar(50) NOT NULL,	
-	grade_type varchar(15) NOT NULL,
-	
+	grade_type varchar(15) NOT NULL,	
 	grade_weight decimal(5,2) NOT NULL,
 	curr_grade decimal(5,2),	
 	
@@ -40,8 +39,8 @@ create table subject_timetable_info
 	student_id VARCHAR(10) NOT NULL,
 	subject_name varchar(50) NOT NULL,
 	subject_room varchar(10) NOT NULL,	
-	subject_start DATETIME NOT NULL,
-	subject_end DATETIME NOT NULL,	
+	subject_day ENUM ('Monday','Tuesday','Wednesday','Thursday','Friday'),
+	subject_period ENUM ('9:00', '10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'),
 	
 	foreign key (student_id) references student_info(student_id)	
 ) Engine = INNODB;
@@ -80,11 +79,11 @@ insert into subject_grade_info (student_id, subject_name, grade_type, grade_weig
 #subject_timetable_info tests
 describe subject_timetable_info;
 
-insert into subject_timetable_info (student_id, subject_name, subject_room, subject_start,subject_end) values 
-("G00303598", "OOP", "CR8", '2019-03-22 10:00:00', '2019-03-22 13:00:00'),
-("G00303598", "OOP", "970", '2019-03-23 12:30:00', '2019-03-22 14:00:00'),
-("G00346889", "OOP", "CR8", '2019-03-24 10:10:00', '2019-03-22 11:00:00'),
-("G00346889", "OOP", "970", '2019-03-25 10:00:00', '2019-03-22 14:00:00');
+insert into subject_timetable_info (student_id, subject_name, subject_room, subject_day, subject_period) values 
+("G00303598", "OOP", "CR8", 'Monday', '9:00'),
+("G00303598", "OOP", "970", 'Tuesday', '11:00'),
+("G00346889", "OOP", "CR8", 'Wednesday', '13:00'),
+("G00346889", "OOP", "970", 'Thursday', '14:00');
 
 select * from subject_timetable_info;
 
