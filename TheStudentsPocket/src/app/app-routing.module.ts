@@ -57,8 +57,11 @@ const routes: Routes = [
         loadChildren: './edit-grade/edit-grade.module#EditGradePageModule',
         canActivate: [AuthGuard]
     },
-
-
+    {
+        path: 'create-grade',
+        loadChildren: './create-grade/create-grade.module#CreateGradePageModule',
+        canActivate: [AuthGuard]
+    },
 ];
 
 @NgModule({

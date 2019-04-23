@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Create Grade Info</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form class="subject-form" (submit)="addGrade(subject_form)" #subject_form="ngForm">
+    <!-- Error message div -->
+    <mat-error *ngIf="subject_name.invalid">{{getErrorMessage()}}</mat-error>
+
+    <mat-form-field>
+      <input matInput type="text" name="subject_name" ngModel required="true" placeholder="Module Name"
+             #subject_name="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" name="grade_type" ngModel placeholder="Grade Type"
+             #grade_type="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" name="grade_weight" ngModel placeholder="Grade Weight"
+             #grade_weight="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" name="curr_grade" ngModel placeholder="Current Grade"
+             #curr_grade="ngModel">
+    </mat-form-field>
+    <ion-button type="submit" [disabled]="!subject_form.form.valid">Add Grade</ion-button>
+  </form>
+</ion-content>

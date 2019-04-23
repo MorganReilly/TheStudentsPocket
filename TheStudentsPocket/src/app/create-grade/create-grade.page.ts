@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
 import {ApiService} from '../services/api.service';
 import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
-    selector: 'app-create-subject',
-    templateUrl: './create-subject.page.html',
-    styleUrls: ['./create-subject.page.scss'],
+    selector: 'app-create-grade',
+    templateUrl: './create-grade.page.html',
+    styleUrls: ['./create-grade.page.scss'],
 })
-export class CreateSubjectPage implements OnInit {
+export class CreateGradePage implements OnInit {
 
     private errorMessage;
 
@@ -30,8 +30,9 @@ export class CreateSubjectPage implements OnInit {
 
     // End ======================================================================
 
-    addSubject(form: NgForm) {
-        this.api.addSubject(form.value.module_name, form.value.module_desc).subscribe(data => {
+
+    addGrade(form: NgForm) {
+        this.api.addGrade(form.value.module_name, form.value.module_desc).subscribe(data => {
             if (data.status) {
                 this.router.navigate(['/subject-overview']);
             } else if (data.errorCode === 'ER_DUP_ENTRY') {
@@ -48,4 +49,4 @@ export class CreateSubjectPage implements OnInit {
     ngOnInit() {
     }
 
-}// End class
+}

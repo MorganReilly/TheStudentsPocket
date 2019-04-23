@@ -120,6 +120,7 @@ export class ApiService {
 
     /**
      * @title Gets all grade info.
+     * @desc gets all the modules a student has entered into there account.
      */
     getAllGradeInfo(): Observable<any> {
         return this.http.get(this.serverURL + '/api/students/subjects/grades');
@@ -144,6 +145,11 @@ export class ApiService {
         return this.http.put<IsProcessed>(this.serverURL + '/api/students/subjects/grades/' + id, studentGrade);
     }// End edit subject function
 
+    /**
+     * @title GET a grade
+     * @desc gets one grade from a grades records by id of the grade
+     * @param id.
+     */
     getGrade(id: number): Observable<any> {
         return this.http.get(this.serverURL + '/api/students/subjects/grade/' + id);
     }
@@ -156,6 +162,28 @@ export class ApiService {
     deleteGrade(id: number): Observable<any> {
         return this.http.delete(this.serverURL + '/api/students/subjects/grades/' + id);
     }// end delete subject function
+
+    /**
+     * @title Adds a grade to a grades document in the database
+     * @desc updates a grades records in the database with a grade they added in the UI.
+     * @param subject_name
+     * @param grade_type
+     * @param grade_weight
+     * @param curr_grade
+     */
+    addGrade(subject_name: String, grade_type: String, grade_weight: number, curr_grade: number): Observable<IsProcessed> {
+        const studentGrade: StudentGrade = {
+            subject_name: subject_name,
+            grade_type: grade_type,
+            grade_weight: grade_weight,
+            curr_grade: curr_grade
+        };
+        // Log message to server console:
+        console.log('Inside API: ' + studentGrade);
+
+        // PUT REQUEST to server:
+        return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects/grades', studentGrade);
+    }// End addGrade function
 
     /**
      * @title Logout request
