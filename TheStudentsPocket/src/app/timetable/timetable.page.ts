@@ -11,8 +11,6 @@ import {not} from 'rxjs/internal-compatibility';
 export class TimetablePage implements OnInit {
 
     // Variables
-    periods: Map<string, any>;
-
     timetableEntrys: any = [];
 
     constructor(private api: ApiService) {
@@ -27,22 +25,13 @@ export class TimetablePage implements OnInit {
     } // End delete function
 
     ngOnInit() {
-        /*
+
         this.api.getAllTimetableEntrys().subscribe(data => {
-                this.timetableEntrys = data;
-                console.log(data);
+            this.timetableEntrys = data;
+            console.log(data);
+        });
 
-            const periods = new Map<string, any>();
-            new Set(data.map(period => period['subject_day'])).forEach(function(day: string) {
-                periods[day] = data.filter(function (p) { return p['subject_day'] === day; });
-            });
-            this.periods = periods;
-            console.log(this.periods);
-
-            }
-
-        );
-        */
     }
+
 
 }

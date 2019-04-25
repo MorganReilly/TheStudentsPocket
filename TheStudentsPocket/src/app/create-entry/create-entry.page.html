@@ -1,9 +1,48 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>create-entry</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Create Timetable Entry</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <form class="subject-form" (submit)="addEntry(subject_form)" #subject_form="ngForm">
+        <!-- Error message div -->
+        <mat-error *ngIf="subject_name.invalid">{{getErrorMessage()}}</mat-error>
 
+        <mat-form-field>
+            <input matInput type="text" name="subject_name" ngModel required="true" placeholder="Module Name"
+                   #subject_name="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput type="text" name="subject_room" ngModel placeholder="Subject Room"
+                   #subject_room="ngModel">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Select Period" name="subject_period" ngModel #subject_period="ngModel">
+                <mat-option value="9:00" name="subject_period">9:00</mat-option>
+                <mat-option value="10:00" name="subject_period">10:00</mat-option>
+                <mat-option value="11:00" name="subject_period">11:00</mat-option>
+                <mat-option value="12:00" name="subject_period">12:00</mat-option>
+                <mat-option value="13:00" name="subject_period">13:00</mat-option>
+                <mat-option value="14:00" name="subject_period">14:00</mat-option>
+                <mat-option value="15:00" name="subject_period">15:00</mat-option>
+                <mat-option value="16:00" name="subject_period">16:00</mat-option>
+                <mat-option value="17:00" name="subject_period">17:00</mat-option>
+                <mat-option value="18:00" name="subject_period">18:00</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="Select Day" name="subject_day" ngModel #subject_day="ngModel">
+                <mat-option value="Monday" name="subject_day">Monday</mat-option>
+                <mat-option value="Tuesday" name="subject_day">Tuesday</mat-option>
+                <mat-option value="Wednesday" name="subject_day">Wednesday</mat-option>
+                <mat-option value="Thursday" name="subject_day">Thursday</mat-option>
+                <mat-option value="Friday" name="subject_day">Friday</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <ion-button type="submit" [disabled]="!subject_form.form.valid">Add Entry</ion-button>
+    </form>
 </ion-content>

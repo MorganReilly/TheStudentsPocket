@@ -6,7 +6,15 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {CreateEntryPage} from './create-entry.page';
-import {MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
+import {
+    MatButtonModule,
+    MatCardModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+} from '@angular/material';
 
 const routes: Routes = [
     {
@@ -21,8 +29,12 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),
-        MatFormFieldModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatCardModule,
         MatDialogModule,
+        MatDividerModule,
+        MatFormFieldModule,
         MatInputModule,
     ],
     declarations: [CreateEntryPage]

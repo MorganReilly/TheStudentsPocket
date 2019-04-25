@@ -7,6 +7,7 @@ import {StudentGrade} from '../student_grade.model';
 import {IsLoggedIn} from '../is-logged-in';
 import {IsProcessed} from '../is-processed';
 import {Logout} from '../logout';
+import {Timetable} from '../timetable.model';
 
 
 /* @title APIService Class
@@ -201,6 +202,28 @@ export class ApiService {
     deleteEntry(id: number): Observable<any> {
         return this.http.delete(this.serverURL + '/api/students/subjects/timetable/' + id);
     }// end delete subject function
+
+    /**
+     * @title Adds a timetable to a timetable document in the database
+     * @desc updates a timetable records in the database with a timetable they added in the UI.
+     * @param subject_name
+     * @param subject_room
+     * @param subject_day
+     * @param subject_period
+     */
+    addEntry(subject_name: String, subject_room: String, subject_day: String, subject_period: String): Observable<IsProcessed> {
+        const timetable: Timetable = {
+            subject_name: subject_name,
+            subject_room: subject_room,
+            subject_day: subject_day,
+            subject_period: subject_period
+        };
+        // Log message to server console:
+        console.log('Inside API: ' + timetable);
+
+        // PUT REQUEST to server:
+        return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects/timetable', timetable);
+    }// End addGrade function
 
     /**
      * @title Logout request
