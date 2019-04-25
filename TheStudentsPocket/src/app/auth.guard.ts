@@ -25,7 +25,6 @@ export class AuthGuard implements CanActivate {
 
         // Make a request to api class to make a request to server to check is the user logged in.
         return this.api.isLoggedIn().pipe(map(res => {
-            console.log(res.status); // Log response
             if (res.status) { // If user is logged in setLogegdIn = true and return true.
                 this.auth.setloggedIn(true);
                 return true;

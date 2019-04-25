@@ -25,7 +25,6 @@ export class SubjectOverviewPage implements OnInit {
     ngOnInit() {
         this.api.getAllSubjects().subscribe(data => {
             this.modules = data;
-            console.log(data);
         });
     }// End function
 }// End class

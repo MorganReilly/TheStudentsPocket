@@ -17,7 +17,6 @@ export class AccountPage implements OnInit {
     ngOnInit() {
         this.api.getStudentDetails().subscribe(data => {
             this.student = data;
-            console.log(data);
         });
     }
 }

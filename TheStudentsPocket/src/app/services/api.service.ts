@@ -30,7 +30,6 @@ export class ApiService {
 
     // Function to check if the user has a logged in session:
     isLoggedIn(): Observable<IsLoggedIn> {
-        console.log('IS LOGGED IN REQUEST SENT TO SERVER!');
         return this.http.get<IsLoggedIn>(this.serverURL + '/api/auth', {withCredentials: true});
     }// End isLoggedIn function
 
@@ -47,7 +46,6 @@ export class ApiService {
             student_last_name: student_last_name,
             student_pin: student_pin
         };
-        console.log('Inside API: ', student);
         // POST data to backend handle:
         return this.http.post<IsProcessed>(this.serverURL + '/api/students', student);
     }// End add student
@@ -63,8 +61,6 @@ export class ApiService {
             subject_name: subject_name,
             subject_desc: subject_desc
         };
-        // Log message to server console:
-        console.log('Inside API: ' + subject);
 
         // PUT REQUEST to server:
         return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects', subject);
@@ -179,8 +175,6 @@ export class ApiService {
             grade_weight: grade_weight,
             curr_grade: curr_grade
         };
-        // Log message to server console:
-        console.log('Inside API: ' + studentGrade);
 
         // PUT REQUEST to server:
         return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects/grades', studentGrade);
@@ -218,8 +212,6 @@ export class ApiService {
             subject_day: subject_day,
             subject_period: subject_period
         };
-        // Log message to server console:
-        console.log('Inside API: ' + timetable);
 
         // PUT REQUEST to server:
         return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects/timetable', timetable);

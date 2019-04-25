@@ -26,7 +26,6 @@ export class TimetablePage implements OnInit {
 
         this.api.getAllTimetableEntrys().subscribe(data => {
             this.timetableEntrys = data;
-            console.log(data);
         });
 
     }

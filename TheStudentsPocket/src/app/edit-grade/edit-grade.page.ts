@@ -50,7 +50,6 @@ export class EditGradePage implements OnInit {
 
     ngOnInit() {
         this.api.getGrade(this.route.snapshot.params['id']).subscribe(data => {
-            console.log(data);
             this.grades = data; // API JSON data received from the server passed into tasks array
         });
     }// End ngOnInit
