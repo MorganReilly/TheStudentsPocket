@@ -1,44 +1,44 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button [routerLink]="['/create-grade']">
-        <ion-icon name="add-circle"></ion-icon>
-        <ion-text> Add</ion-text>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Grades</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button [routerLink]="['/create-grade']">
+                <ion-icon name="add-circle"></ion-icon>
+                <ion-text> Add</ion-text>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Grades</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="mainPageRender" *ngIf="grades.length > 0">
 
-  <div class="Container" *ngFor="let grade of grades">
-    <!-- Cards for displaying grade information -->
-    <!-- Retrieve from db and populate in single ion-card tag -->
-    <!-- Local array with complete grade object -->
+    <div class="Container" *ngFor="let grade of grades">
+        <!-- Cards for displaying grade information -->
+        <!-- Retrieve from db and populate in single ion-card tag -->
+        <!-- Local array with complete grade object -->
 
-    <ion-card>
-      <ion-header>
-        <ion-card-title>{{grade.subject_name}}</ion-card-title>
-        <ion-card-subtitle>
-          Type: {{grade.grade_type}}
-        </ion-card-subtitle>
-        <ion-card-subtitle>
-          Weight: {{grade.grade_weight}}%
-        </ion-card-subtitle>
-        <ion-card-subtitle>
-          Current Grade: {{grade.curr_grade}}%
-        </ion-card-subtitle>
-      </ion-header>
-      <mat-card-actions class='buttons'>
-        <!-- Deletes by the subjects _id -->
-        <button mat-button color="warn" (click)="onDelete(grade.id)">Delete Grade</button>
-        <!-- Edit subject information -->
-        <button mat-button color="primary" [routerLink]="['/edit-grade', grade.id]">Edit</button>
-      </mat-card-actions>
-    </ion-card>
-  </div>
+        <ion-card>
+            <ion-header>
+                <ion-card-title>{{grade.subject_name}}</ion-card-title>
+                <ion-card-subtitle>
+                    Type: {{grade.grade_type}}
+                </ion-card-subtitle>
+                <ion-card-subtitle>
+                    Weight: {{grade.grade_weight}}%
+                </ion-card-subtitle>
+                <ion-card-subtitle>
+                    Current Grade: {{grade.curr_grade}}%
+                </ion-card-subtitle>
+            </ion-header>
+            <mat-card-actions class='buttons'>
+                <!-- Deletes by the subjects _id -->
+                <button mat-button color="warn" (click)="onDelete(grade.id)">Delete Grade</button>
+                <!-- Edit subject information -->
+                <button mat-button color="primary" [routerLink]="['/edit-grade', grade.id]">Edit</button>
+            </mat-card-actions>
+        </ion-card>
+    </div>
 </ion-content>

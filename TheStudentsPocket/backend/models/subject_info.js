@@ -1,7 +1,7 @@
 //Variables
 let sql = require('../config/config.js');
 
-/* @title Subject grade model.
+/* @title Subject info model.
  * @desc this class is used as the model class for the table 'subject_info' for the applications database.
  * This allows CRUD queries to be run on the database.
  */
@@ -15,7 +15,7 @@ let SubjectInfo = function (subject) {
 
 // Create a new subject record for a student
 SubjectInfo.createSubject = function createSubject(newSubject, result) {
-    sql.query('INSERT INTO subject_info set ?', newSubject,function (err, res) {
+    sql.query('INSERT INTO subject_info set ?', newSubject, function (err, res) {
         if (err) {
             // Log error & return it.
             console.log(err);

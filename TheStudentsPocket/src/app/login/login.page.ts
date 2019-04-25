@@ -26,6 +26,7 @@ export class LoginPage implements OnInit {
     getErrorMessage() {
         return this.errorMessage;
     }
+
     // End ======================================================================
 
     // Login function that makes a call to auth.service to check if the user exists in the database.

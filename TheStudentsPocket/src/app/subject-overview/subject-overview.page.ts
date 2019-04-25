@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {CreateSubjectPage} from '../create-subject/create-subject.page';
+import {Component, OnInit} from '@angular/core';
 import {ApiService} from '../services/api.service';
 
 @Component({
-  selector: 'app-subject-overview',
-  templateUrl: './subject-overview.page.html',
-  styleUrls: ['./subject-overview.page.scss'],
+    selector: 'app-subject-overview',
+    templateUrl: './subject-overview.page.html',
+    styleUrls: ['./subject-overview.page.scss'],
 })
 export class SubjectOverviewPage implements OnInit {
 

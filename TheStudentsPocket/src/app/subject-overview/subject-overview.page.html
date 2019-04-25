@@ -1,39 +1,39 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button [routerLink]="['/create-subject']">
-        <ion-icon name="add-circle"></ion-icon>
-        <ion-text> Add</ion-text>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Subject Overview</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button [routerLink]="['/create-subject']">
+                <ion-icon name="add-circle"></ion-icon>
+                <ion-text> Add</ion-text>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Subject Overview</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content class="mainPageRender" *ngIf="modules.length > 0 ">
 
-  <div class="Container" *ngFor="let module of modules">
-    <!-- Cards for subject-->
-    <!-- Retrieve from db and populate in single ion-card tag -->
-    <!-- Local array with complete student object -->
-    <ion-card>
-      <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
-      <ion-card-header>
-        <ion-card-title>{{module.subject_name}}</ion-card-title>
-        <ion-card-subtitle>{{module.subject_desc}}</ion-card-subtitle>
-      </ion-card-header>
+    <div class="Container" *ngFor="let module of modules">
+        <!-- Cards for subject-->
+        <!-- Retrieve from db and populate in single ion-card tag -->
+        <!-- Local array with complete student object -->
+        <ion-card>
+            <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
+            <ion-card-header>
+                <ion-card-title>{{module.subject_name}}</ion-card-title>
+                <ion-card-subtitle>{{module.subject_desc}}</ion-card-subtitle>
+            </ion-card-header>
 
-      <mat-card-actions class='buttons'>
-        <!-- Deletes by the subjects _id -->
-        <button mat-button color="warn" (click)="onDelete(module.id)">Delete Subject</button>
-        <!-- Edit subject information -->
-        <button mat-button color="primary" [routerLink]="['/edit-subject', module.id]">Edit</button>
-        <button mat-button color="primary" [routerLink]="['/grades']">Grades</button>
-      </mat-card-actions>
-    </ion-card>
-  </div>
+            <mat-card-actions class='buttons'>
+                <!-- Deletes by the subjects _id -->
+                <button mat-button color="warn" (click)="onDelete(module.id)">Delete Subject</button>
+                <!-- Edit subject information -->
+                <button mat-button color="primary" [routerLink]="['/edit-subject', module.id]">Edit</button>
+                <button mat-button color="primary" [routerLink]="['/grades']">Grades</button>
+            </mat-card-actions>
+        </ion-card>
+    </div>
 
 </ion-content>

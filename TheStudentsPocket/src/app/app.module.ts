@@ -52,7 +52,7 @@ import {CreateSubjectPage} from './create-subject/create-subject.page';
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
     ],
     bootstrap: [AppComponent],
-    entryComponents: [ AppComponent ]
+    entryComponents: [AppComponent]
 })
 
 export class AppModule {

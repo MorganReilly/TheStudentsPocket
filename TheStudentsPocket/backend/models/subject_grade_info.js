@@ -30,7 +30,7 @@ GradeInfo.createGrade = function (newGrade, result) {
 };
 
 // Get all subject information:
-GradeInfo.getAllGrades = function (student_id,result) {
+GradeInfo.getAllGrades = function (student_id, result) {
     sql.query('SELECT * from subject_grade_info where student_id = ?', [student_id], function (err, res) {
         if (err) {
             console.log(err);

@@ -6,7 +6,7 @@ let sql = require('../config/config.js');
  * This allows CRUD queries to be run on the database.
  */
 
- // Timetable Constructor:
+// Timetable Constructor:
 let Timetable = function (timetable) {
     this.student_id = timetable.student_id;
     this.subject_name = timetable.subject_name;
@@ -16,7 +16,7 @@ let Timetable = function (timetable) {
 };
 
 // POST a new timetable entry
-Timetable.createEntry = function(newEntry, result){
+Timetable.createEntry = function (newEntry, result) {
     sql.query('INSERT INTO subject_timetable_info set ?', newEntry, function (err, res) {
         if (err) {
             console.log(err);
@@ -30,7 +30,7 @@ Timetable.createEntry = function(newEntry, result){
 };
 
 // Get all timetable entrys:
-Timetable.getAllEntrys = function (student_id,result) {
+Timetable.getAllEntrys = function (student_id, result) {
     sql.query('SELECT * from subject_timetable_info where student_id = ? order by subject_day, subject_period asc;', [student_id], function (err, res) {
         if (err) {
             console.log(err);
@@ -45,6 +45,19 @@ Timetable.getAllEntrys = function (student_id,result) {
 // Get a entry by its ID:
 Timetable.getEntry = function (student_id, id, result) {
     sql.query('SELECT * from subject_timetable_info where student_id = ? AND id = ? ', [student_id, id], function (err, res) {
+        if (err) {
+            console.log(err);
+            result(null, err);
+        } else {
+            console.log(res);
+            result(null, res);
+        }
+    });
+};
+
+// Get a entry by its ID:
+Timetable.getEntryByDay = function (student_id, dayOfWeek, result) {
+    sql.query('SELECT * from subject_timetable_info where student_id = ? AND subject_day = ?', [student_id, dayOfWeek], function (err, res) {
         if (err) {
             console.log(err);
             result(null, err);
@@ -81,5 +94,3 @@ Timetable.update = function (updatedEntry, student_id, id, result) {
 };
 
 module.exports = Timetable;
-
-

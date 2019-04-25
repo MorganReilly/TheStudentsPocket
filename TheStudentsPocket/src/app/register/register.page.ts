@@ -26,6 +26,7 @@ export class RegisterPage implements OnInit {
     getErrorMessage() {
         return this.errorMessage;
     }
+
     // End ======================================================================
 
     /**

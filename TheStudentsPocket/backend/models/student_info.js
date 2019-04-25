@@ -15,7 +15,7 @@ let StudentInfo = function (student) {
 };
 
 // Get a students info by the student id number:
-StudentInfo.getDetails = function(student_id, result){
+StudentInfo.getDetails = function (student_id, result) {
     sql.query('SELECT * FROM student_info WHERE student_id =?', [student_id], function (err, res) {
         if (err) {
             console.log(err);

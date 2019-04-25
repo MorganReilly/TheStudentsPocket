@@ -8,25 +8,26 @@ import {LoginPage} from './login.page';
 import {MatButtonModule, MatCardModule, MatDialogModule, MatFormFieldModule, MatInputModule} from '@angular/material';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: LoginPage
-  }
+    {
+        path: '',
+        component: LoginPage
+    }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    MatButtonModule
-  ],
-  declarations: [LoginPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        MatButtonModule
+    ],
+    declarations: [LoginPage]
 })
-export class LoginPageModule {}
+export class LoginPageModule {
+}

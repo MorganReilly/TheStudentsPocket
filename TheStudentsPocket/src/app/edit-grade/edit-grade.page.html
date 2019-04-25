@@ -1,44 +1,45 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>Edit Grade</ion-title>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Edit Grade</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <div class="content" *ngIf="grades && grades.length > 0">
-    <mat-error *ngIf="subject_name.invalid">{{getErrorMessage()}}</mat-error>
-    <!-- *ngIf="arr && arr.length > 0" is used to stop undefined at the moment of the template rendering -->
-    <!--  TITLE  -->
-    <h2 mat-dialog-title>Edit Grade</h2>
-    <!--  FORM  -->
-    <form class="subject-form" (submit)="onEditGrade(postForm)" #postForm="ngForm">
-      <mat-form-field>
-        <input matInput type="text" name="subject_name" ngModel="{{grades[0].subject_name}}" required="true"
-               placeholder="Module Name"
-               #subject_name="ngModel">
-        <mat-error *ngIf="subject_name.invalid">Please enter subject name!</mat-error>
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text" name="grade_type" ngModel="{{grades[0].grade_type}}"
-               placeholder="Grade Description"
-               #grade_type="ngModel">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text" name="grade_weight" ngModel="{{grades[0].grade_weight}}"
-               placeholder="Grade Weight"
-               #grade_weight="ngModel">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput type="text" name="curr_grade" ngModel="{{grades[0].curr_grade}}"
-               placeholder="Current Grade"
-               #curr_grade="ngModel">
-      </mat-form-field>
+    <div class="content" *ngIf="grades && grades.length > 0">
+        <mat-error *ngIf="subject_name.invalid">{{getErrorMessage()}}</mat-error>
+        <!-- *ngIf="arr && arr.length > 0" is used to stop undefined at the moment of the template rendering -->
+        <!--  TITLE  -->
+        <h2 mat-dialog-title>Edit Grade</h2>
+        <!--  FORM  -->
+        <form class="subject-form" (submit)="onEditGrade(postForm)" #postForm="ngForm">
+            <mat-form-field>
+                <input matInput type="text" name="subject_name" ngModel="{{grades[0].subject_name}}" required="true"
+                       placeholder="Module Name"
+                       #subject_name="ngModel">
+                <mat-error *ngIf="subject_name.invalid">Please enter subject name!</mat-error>
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" name="grade_type" ngModel="{{grades[0].grade_type}}"
+                       placeholder="Grade Description"
+                       #grade_type="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" name="grade_weight" ngModel="{{grades[0].grade_weight}}"
+                       placeholder="Grade Weight"
+                       #grade_weight="ngModel">
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="text" name="curr_grade" ngModel="{{grades[0].curr_grade}}"
+                       placeholder="Current Grade"
+                       #curr_grade="ngModel">
+            </mat-form-field>
 
-      <button mat-raised-button color="accent" type="submit" [disabled]="!postForm.form.valid">Update Grade</button>
-    </form>
-  </div>
+            <button mat-raised-button color="accent" type="submit" [disabled]="!postForm.form.valid">Update Grade
+            </button>
+        </form>
+    </div>
 
 </ion-content>

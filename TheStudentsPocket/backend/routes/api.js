@@ -128,11 +128,11 @@ router.post('/students', function (req, res) {
 
     // Handle for null errors if any
     if (!new_student.student_id || !new_student.student_first_name || !new_student.student_last_name) {
-        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
+        res.status(400).send({error: true, message: 'Please provide all criteria!'});
     } else {
         StudentInfo.createStudent(new_student, function (err, data) {
             if (err) {
-                res.send({status: false, errorCode: err.code ,message: err.message});
+                res.send({status: false, errorCode: err.code, message: err.message});
             } else {
                 //Complete!
                 res.json({status: true, errorCode: null, message: data}); //sendback request
@@ -152,7 +152,7 @@ router.delete('/students/:id', function (req, res) {
             res.send(err);
         } else {
             //Complete!
-            res.json({ message: 'Student successfully deleted' }, data);
+            res.json({message: 'Student successfully deleted'}, data);
         }
     });
 });//End DELETE REQUEST
@@ -213,14 +213,14 @@ router.post('/students/subjects/', function (req, res) {
 
     // Handle for null errors if any
     if (!new_subject.student_id || !new_subject.subject_name) {
-        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
+        res.status(400).send({error: true, message: 'Please provide all criteria!'});
     } else {
-        SubjectInfo.createSubject(new_subject ,function (err, data) {
+        SubjectInfo.createSubject(new_subject, function (err, data) {
             if (err) {
-                res.send({ status: false, errorCode: err.code, message: err.message });
+                res.send({status: false, errorCode: err.code, message: err.message});
             } else {
                 //Complete!
-                res.send({ status: true, errorCode: null, message: data }); //sendback request
+                res.send({status: true, errorCode: null, message: data}); //sendback request
             }
         });
     }// End if else
@@ -241,14 +241,14 @@ router.put('/students/subjects/subject/:id', function (req, res) {
     console.log(updatedSubject);
     // Handle for null errors if any
     if (!updatedSubject.subject_name) {
-        res.status(400).send({ error: true, message: 'Please provide a subject name' });
+        res.status(400).send({error: true, message: 'Please provide a subject name'});
     } else {
-        SubjectInfo.update(updatedSubject, activeSession.student_id ,req.params.id, function (err, data) {
+        SubjectInfo.update(updatedSubject, activeSession.student_id, req.params.id, function (err, data) {
             if (err) {
-                res.send({ status: false, message: err.message });
+                res.send({status: false, message: err.message});
             } else {
                 //Complete!
-                res.json({ status: true, message: data }); //sendback request
+                res.json({status: true, message: data}); //sendback request
             }
         });
     }// End if else
@@ -308,14 +308,14 @@ router.post('/students/subjects/grades', function (req, res) {
 
     // Handle for null errors if any
     if (!new_grade.student_id || !new_grade.subject_name) {
-        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
+        res.status(400).send({error: true, message: 'Please provide all criteria!'});
     } else {
         Grade.createGrade(new_grade, function (err, data) {
             if (err) {
-                res.send({ status: false, message: err.message });
+                res.send({status: false, message: err.message});
             } else {
                 //Complete!
-                res.json({ status: true, message: data }); //sendback request
+                res.json({status: true, message: data}); //sendback request
             }
         });
     }// End if else
@@ -338,14 +338,14 @@ router.put('/students/subjects/grades/:id', function (req, res) {
     console.log(updatedGrade);
     // Handle for null errors if any
     if (!updatedGrade.subject_name) {
-        res.status(400).send({ error: true, message: 'Please provide a grade name' });
+        res.status(400).send({error: true, message: 'Please provide a grade name'});
     } else {
-        Grade.update(updatedGrade, activeSession.student_id ,req.params.id, function (err, data) {
+        Grade.update(updatedGrade, activeSession.student_id, req.params.id, function (err, data) {
             if (err) {
-                res.send({ status: false, message: err.message });
+                res.send({status: false, message: err.message});
             } else {
                 //Complete!
-                res.json({ status: true, message: data }); //sendback request
+                res.json({status: true, message: data}); //sendback request
             }
         });
     }// End if else
@@ -423,14 +423,14 @@ router.post('/students/subjects/timetable', function (req, res) {
 
     // Handle for null errors if any
     if (!new_entry.student_id || !new_entry.subject_name) {
-        res.status(400).send({ error: true, message: 'Please provide all criteria!' });
+        res.status(400).send({error: true, message: 'Please provide all criteria!'});
     } else {
         Timetable.createEntry(new_entry, function (err, data) {
             if (err) {
-                res.send({ status: false, message: err.message });
+                res.send({status: false, message: err.message});
             } else {
                 //Complete!
-                res.json({ status: true, message: data }); //sendback request
+                res.json({status: true, message: data}); //sendback request
             }
         });
     }// End if else
@@ -453,14 +453,14 @@ router.put('/students/subjects/timetable/:id', function (req, res) {
     console.log(updatedTimetableEntry);
     // Handle for null errors if any
     if (!updatedTimetableEntry.subject_name) {
-        res.status(400).send({ error: true, message: 'Please provide a grade name' });
+        res.status(400).send({error: true, message: 'Please provide a grade name'});
     } else {
-        Timetable.update(updatedTimetableEntry, activeSession.student_id ,req.params.id, function (err, data) {
+        Timetable.update(updatedTimetableEntry, activeSession.student_id, req.params.id, function (err, data) {
             if (err) {
-                res.send({ status: false, message: err.message });
+                res.send({status: false, message: err.message});
             } else {
                 //Complete!
-                res.json({ status: true, message: data }); //sendback request
+                res.json({status: true, message: data}); //sendback request
             }
         });
     }// End if else
@@ -475,6 +475,24 @@ router.put('/students/subjects/timetable/:id', function (req, res) {
 router.get('/students/subjects/timetable/:id', function (req, res) {
     console.log(activeSession.student_id, req.params.id);
     Timetable.getEntry(activeSession.student_id, req.params.id, function (err, data) {
+        if (err) {
+            res.send(err);
+        } else {
+            //Complete! sendback
+            console.log(data);
+            res.send(data);
+        }
+    });
+}); // End GET REQUEST
+
+/**
+ * @title GET TIMETABLE ENTRY BY DAY REQUEST, getEntryByDay()
+ * @desc gets a grade from a students records by the grade ID
+ * @note executes immediately, passing results to callback. Logs the data to the server console.
+ */
+router.get('/students/subjects/timetable/:subject_day', function (req, res) {
+    console.log(activeSession.student_id, req.params.subject_day);
+    Timetable.getEntryByDay(activeSession.student_id, req.params.subject_day, function (err, data) {
         if (err) {
             res.send(err);
         } else {
