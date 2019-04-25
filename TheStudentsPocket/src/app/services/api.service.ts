@@ -194,6 +194,15 @@ export class ApiService {
     }// End getAllTimetableEntry function
 
     /**
+     * @title Deletes an entry
+     * @desc deletes a selected timetable entry from the database.
+     * @note passes String, Server takes care of the request.
+     */
+    deleteEntry(id: number): Observable<any> {
+        return this.http.delete(this.serverURL + '/api/students/subjects/timetable/' + id);
+    }// end delete subject function
+
+    /**
      * @title Logout request
      * @desc a request to the server to log the user out and destroy their session.
      */

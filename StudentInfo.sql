@@ -17,8 +17,7 @@ Create Table subject_info
 	subject_name varchar(50) NOT NULL,
 	subject_desc varchar(150),
 	
-	foreign key (student_id) references student_info(student_id),
-	UNIQUE (student_id, subject_name)
+	foreign key (student_id) references student_info(student_id)
 ) Engine = INNODB;
 
 Create Table subject_grade_info
@@ -26,7 +25,7 @@ Create Table subject_grade_info
 	id integer(3) zerofill not null auto_increment PRIMARY KEY,
 	student_id VARCHAR(10) NOT NULL,
 	subject_name varchar(50) NOT NULL,	
-	grade_type varchar(15) NOT NULL,	
+	grade_type varchar(255) NOT NULL,	
 	grade_weight decimal(5,2) NOT NULL,
 	curr_grade decimal(5,2),	
 	
@@ -46,31 +45,84 @@ create table subject_timetable_info
 ) Engine = INNODB;
 
 
-#student_info Tests
+#student_info population
 describe student_info;
 insert into student_info(student_id, student_first_name, student_last_name, student_pin) values 
 ("G00303598", "Morgan", "Reilly", 999999),
 ("G00346889", "Cathal", "Butler", 888888);
 select * from student_info;
 
-#subject_info Tests
+#subject_info population
 describe subject_info;
 insert into subject_info (student_id, subject_name, subject_desc) values 
- ("G00303598", "OOP", "Project + MCQ"),
- ("G00303598", "Data Centric", "Project + MCQ"),
- ("G00346889", "OOP", "Project work"),
- ("G00346889", "Data Centric", "Project work");
+ ("G00303598", "DBMS", "Exam"),
+ ("G00303598", "DBMS", "MCQ"),
+ ("G00303598", "DBMS", "Attendance"),
+ ("G00303598", "DBMS", "Project"),
+ ("G00303598", "Adv. Data Centric", "MCQ"),
+ ("G00303598", "Adv. Data Centric", "Written Exam"),
+ ("G00303598", "Adv. Data Centric", "Project"),
+ ("G00303598", "Mobile App Dev 2", "Project"),
+ ("G00303598", "Mobile App Dev 2", "Open Book Coding"),
+ ("G00303598", "Graph Theory", "Project"),
+ ("G00303598", "Graph Theory", "Exam"),
+ ("G00303598", "Software Testing", "Selinium MCQ"),
+ ("G00303598", "Software Testing", "Open Book Testing Exam"),
+ ("G00303598", "Software Testing", "Exam"),
+ ("G00303598", "Professional Practice in IT", "Project"),
+ 
+ ("G00346889", "DBMS", "Exam"),
+ ("G00346889", "DBMS", "MCQ"),
+ ("G00346889", "DBMS", "Attendance"),
+ ("G00346889", "DBMS", "Project"),
+ ("G00346889", "Adv. Data Centric", "MCQ"),
+ ("G00346889", "Adv. Data Centric", "Written Exam"),
+ ("G00346889", "Adv. Data Centric", "Project"),
+ ("G00346889", "Mobile App Dev 2", "Project"),
+ ("G00346889", "Mobile App Dev 2", "Open Book Coding"),
+ ("G00346889", "Graph Theory", "Project"),
+ ("G00346889", "Graph Theory", "Exam"),
+ ("G00346889", "Software Testing", "Selinium MCQ"),
+ ("G00346889", "Software Testing", "Open Book Testing Exam"),
+ ("G00346889", "Software Testing", "Exam"),
+("G00346889", "Professional Practice in IT", "Project");
+ 
 select * from subject_info;
 
 #Subject_Grade_Info Tests
 describe subject_grade_info;
 insert into subject_grade_info (student_id, subject_name, grade_type, grade_weight, curr_grade) values
- ("G00303598", "OOP", "Project", 50, 0),
- ("G00303598", "OOP", "MCQ1", 25, 0),
- ("G00303598", "OOP", "MCQ2", 25, 0),
- ("G00346889", "OOP", "Project", 50, 0),
- ("G00346889", "OOP", "MCQ1", 25, 0),
- ("G00346889", "OOP", "MCQ2", 25, 0);
+ ("G00303598", "DBMS", "Exam", 50, 0),
+ ("G00303598", "DBMS", "MCQ", 15, 0),
+ ("G00303598", "DBMS", "Attendance", 10, 0),
+ ("G00303598", "DBMS", "Project", 15, 0),
+ ("G00303598", "Adv. Data Centric", "MCQ", 25, 0),
+ ("G00303598", "Adv. Data Centric", "CA1 - Written Coding", 25, 0),
+ ("G00303598", "Adv. Data Centric", "Project", 50, 0),
+ ("G00303598", "Mobile App Dev 2", "Project", 60, 0),
+ ("G00303598", "Mobile App Dev 2", "Open Book Coding", 40, 0),
+ ("G00303598", "Graph Theory", "Project", 50, 0),
+ ("G00303598", "Graph Theory", "Exam", 50, 0),
+ ("G00303598", "Software Testing", "Selinium MCQ", 15, 0),
+ ("G00303598", "Software Testing", "Open Book Testing Exam", 15, 0),
+ ("G00303598", "Software Testing", "Exam", 70, 0),
+("G00303598", "Professional Practice in IT", "Project", 100, 0), 
+ 
+ ("G00346889", "DBMS", "Exam", 50, 0),
+ ("G00346889", "DBMS", "MCQ", 15, 0),
+ ("G00346889", "DBMS", "Attendance", 10, 0),
+ ("G00346889", "DBMS", "Project", 15, 0),
+ ("G00346889", "Adv. Data Centric", "MCQ", 25, 0),
+ ("G00346889", "Adv. Data Centric", "CA1 - Written Coding", 25, 0),
+ ("G00346889", "Adv. Data Centric", "Project", 50, 0),
+ ("G00346889", "Mobile App Dev 2", "Project", 60, 0),
+ ("G00346889", "Mobile App Dev 2", "Open Book Coding", 40, 0),
+ ("G00346889", "Graph Theory", "Project", 50, 0),
+ ("G00346889", "Graph Theory", "Exam", 50, 0),
+ ("G00346889", "Software Testing", "Selinium MCQ", 15, 0),
+ ("G00346889", "Software Testing", "Open Book Testing Exam", 15, 0),
+ ("G00346889", "Software Testing", "Exam", 70, 0),
+("G00346889", "Professional Practice in IT", "Project", 100, 0);
 select * from subject_grade_info;
 
 #Constraint test
@@ -80,9 +132,31 @@ insert into subject_grade_info (student_id, subject_name, grade_type, grade_weig
 describe subject_timetable_info;
 
 insert into subject_timetable_info (student_id, subject_name, subject_room, subject_day, subject_period) values 
-("G00303598", "OOP", "CR8", 'Monday', '9:00'),
-("G00303598", "OOP", "970", 'Tuesday', '11:00'),
-("G00346889", "OOP", "CR8", 'Wednesday', '13:00'),
+ ("G00303598", "DBMS", "994", 'Monday', '10:00'),
+ ("G00303598", "Mobile App Dev 2", "995", 'Monday', '12:00'),
+ ("G00303598", "Graph Theory", "BYOD", 'Monday', '15:00'),#A
+ ("G00303598", "Adv. Data Centric", "CR5", 'Monday', '10:00'),#C
+ 
+ ("G00303598", "DBMS", "CR1", 'Tuesday', '9:00'),#A
+ ("G00303598", "Software Testing", "CR8", 'Tuesday', '9:00'),#C
+ ("G00303598", "Mobile App Dev 2", "BYOD", 'Tuesday', '11:00'),#A
+ ("G00303598", "Software Testing", "347", 'Tuesday', '13:00'),
+ ("G00303598", "Graph Theory", "BYOD", 'Tuesday', '15:00'),#C
+ ("G00303598", "Software Testing", "BYOD", 'Tuesday', '16:00'),#A
+ 
+ ("G00303598", "Professional Practice in IT", "994", 'Wednesday', '12:00'),
+ ("G00303598", "Professional Practice in IT", "995", 'Wednesday', '13:00'),
+ ("G00303598", "", "", 'Wednesday', '15:00'),
+ 
+ ("G00303598", "Mobile App Dev 2", "BYOB", 'Thursday', '9:00'),#C
+ ("G00303598", "DBMS", "347", 'Thursday', '13:00'),
+ ("G00303598", "Adv. Data Centric", "CR5", 'Thursday', '14:00'),#A
+ ("G00303598", "DBMS", "CR2", 'Thursday', '14:00'),#C
+ ("G00303598", "Adv. Data Centric", "941", 'Thursday', '16:00'),
+ 
+ ("G00303598", "Graph Theory", "Video", 'Friday', '11:00'),
+ 
+
 ("G00346889", "OOP", "970", 'Thursday', '14:00');
 
 select * from subject_timetable_info;

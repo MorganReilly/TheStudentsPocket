@@ -16,14 +16,9 @@ export class AppComponent {
             icon: 'home'
         },
         {
-            title: 'Module Overview',
-            url: '/subject-overview',
-            icon: 'list'
-        },
-        {
-            title: 'Module Creation',
-            url: '/create-subject',
-            icon: 'create'
+            title: 'Timetable',
+            url: '/timetable',
+            icon: 'clock'
         },
         {
             title: 'Grade Overview',
@@ -31,14 +26,19 @@ export class AppComponent {
             icon: 'list'
         },
         {
+            title: 'Module Overview',
+            url: '/subject-overview',
+            icon: 'list'
+        },
+        {
             title: 'Grade Creation',
-            url: '/create-entry',
+            url: '/create-grade',
             icon: 'create'
         },
         {
-            title: 'Timetable',
-            url: '/timetable',
-            icon: 'clock'
+            title: 'Module Creation',
+            url: '/create-subject',
+            icon: 'create'
         }
     ];
 
