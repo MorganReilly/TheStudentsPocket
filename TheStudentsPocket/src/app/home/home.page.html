@@ -14,12 +14,14 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-card class="welcome-card">
-        <ion-img src="/assets/the_students_pocket.svg"></ion-img>
-        <ion-card-header>
-            <ion-card-subtitle>Get Started</ion-card-subtitle>
-            <ion-card-title>Welcome to The Students Pocket</ion-card-title>
-        </ion-card-header>
-    </ion-card>
+<ion-content padding *ngIf="student && student.length > 0">
+    <div id="content" *ngFor="let stud of student">
+        <ion-card class="welcome-card">
+            <ion-img src="/assets/the_students_pocket.svg"></ion-img>
+            <ion-card-header>
+                <ion-card-subtitle>{{stud.student_id}}</ion-card-subtitle>
+                <ion-card-title>Welcome {{stud.student_first_name + " " + stud.student_last_name}}</ion-card-title>
+            </ion-card-header>
+        </ion-card>
+    </div>
 </ion-content>

@@ -9,6 +9,9 @@ import {Router} from '@angular/router';
 })
 export class HomePage {
 
+    // Array with user details
+    student: any = [];
+
     constructor(private api: ApiService, private router: Router) {
 
     }
@@ -26,4 +29,10 @@ export class HomePage {
             }// End if else
         });
     }// End logout function
+
+    ngOnInit() {
+        this.api.getStudentDetails().subscribe(data => {
+            this.student = data;
+        });
+    }
 }// End class
