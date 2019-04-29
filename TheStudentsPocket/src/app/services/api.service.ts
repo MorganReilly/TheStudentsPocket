@@ -14,7 +14,6 @@ import {Timetable} from '../timetable.model';
  * @desc allows data to be passed to and from the backend where routes to databases are.
  */
 
-
 @Injectable({
     providedIn: 'root'
 })
@@ -25,7 +24,6 @@ export class ApiService {
     serverURL = 'http://ec2-54-72-80-41.eu-west-1.compute.amazonaws.com:8081';
 
     constructor(private http: HttpClient) {
-
     }
 
     // Function to check if the user has a logged in session:
@@ -124,8 +122,8 @@ export class ApiService {
     }
 
     /**
-     * @title EDIT a grade
-     * @desc updates a grade by the subject id.
+     * @title EDIT a grade.
+     * @desc makes a update request to the server for a grade entry.
      * @param id
      * @param subject_name
      * @param grade_type
@@ -152,8 +150,8 @@ export class ApiService {
     }
 
     /**
-     * @title Deletes a subject
-     * @desc deletes a selected subject from the database.
+     * @title Deletes a grade
+     * @desc makes a request to deletes a selected grade from the database.
      * @note passes String, Server takes care of the request.
      */
     deleteGrade(id: number): Observable<any> {
@@ -182,24 +180,24 @@ export class ApiService {
 
     /**
      * @title Gets all timetable entry.
-     * @desc gets all  timetable entry a student has entered into there account.
+     * @desc gets all timetable entry a student has entered into there account.
      */
     getAllTimetableEntrys(): Observable<any> {
         return this.http.get(this.serverURL + '/api/students/subjects/timetable');
     }// End getAllTimetableEntry function
 
     /**
-     * @title Deletes an entry
-     * @desc deletes a selected timetable entry from the database.
-     * @note passes String, Server takes care of the request.
+     * @title Deletes an entry.
+     * @desc makes a request to the server to delete an entry from the databases.
+     * @note passes number, Server takes care of the request.
      */
     deleteEntry(id: number): Observable<any> {
         return this.http.delete(this.serverURL + '/api/students/subjects/timetable/' + id);
     }// end delete subject function
 
     /**
-     * @title Adds a timetable to a timetable document in the database
-     * @desc updates a timetable records in the database with a timetable they added in the UI.
+     * @title Adds a timetable entry
+     * @desc makes a request to the server to add a new timetable entry
      * @param subject_name
      * @param subject_room
      * @param subject_day
@@ -216,6 +214,34 @@ export class ApiService {
         // PUT REQUEST to server:
         return this.http.post<IsProcessed>(this.serverURL + '/api/students/subjects/timetable', timetable);
     }// End addGrade function
+
+    /**
+     * @title EDIT a entry
+     * @desc makes a update request to the server.
+     * @param id
+     * @param subject_name
+     * @param subject_room
+     * @param subject_day
+     * @param subject_period
+     */
+    editEntry(id: number, subject_name: String, subject_room: String, subject_day: String, subject_period: String): Observable<IsProcessed> {
+        const timetableEntry: Timetable = {
+            subject_name: subject_name,
+            subject_room: subject_room,
+            subject_day: subject_day,
+            subject_period: subject_period
+        };
+        return this.http.put<IsProcessed>(this.serverURL + '/api/students/subjects/timetable/' + id, timetableEntry);
+    }// End edit subject function
+
+    /**
+     * @title GET a timetable entry by id
+     * @desc makes a request to get one entry by id from the server.
+     * @param id.
+     */
+    getEntry(id: number): Observable<any> {
+        return this.http.get(this.serverURL + '/api/students/subjects/timetable/' + id);
+    }
 
     /**
      * @title Logout request

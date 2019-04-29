@@ -1,9 +1,62 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>edit-entry</ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Edit Timetable Entry</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <div class="content" *ngIf="entrys && entrys.length > 0">
 
+        <mat-error *ngIf="subject_name.invalid">{{getErrorMessage()}}</mat-error>
+        <!-- *ngIf="arr && arr.length > 0" is used to stop undefined at the moment of the template rendering -->
+        <!--  TITLE  -->
+        <h2 mat-dialog-title>Edit Entry</h2>
+        <!--  FORM  -->
+        <form class="subject-form" (submit)="onEditEntry(postForm)" #postForm="ngForm">
+            <mat-form-field>
+                <input matInput type="text" name="subject_name" ngModel="{{entrys[0].subject_name}}" required="true"
+                       placeholder="Module Name"
+                       #subject_name="ngModel">
+                <mat-error *ngIf="subject_name.invalid">Please enter subject name!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput type="text" name="grade_type" ngModel="{{entrys[0].subject_room}}"
+                       placeholder="Room"
+                       #subject_room="ngModel">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-select placeholder="Select Period" name="subject_period" ngModel="{{entrys[0].subject_period}}"
+                            #subject_period="ngModel">
+                    <mat-option value="9:00" name="subject_period">9:00</mat-option>
+                    <mat-option value="10:00" name="subject_period">10:00</mat-option>
+                    <mat-option value="11:00" name="subject_period">11:00</mat-option>
+                    <mat-option value="12:00" name="subject_period">12:00</mat-option>
+                    <mat-option value="13:00" name="subject_period">13:00</mat-option>
+                    <mat-option value="14:00" name="subject_period">14:00</mat-option>
+                    <mat-option value="15:00" name="subject_period">15:00</mat-option>
+                    <mat-option value="16:00" name="subject_period">16:00</mat-option>
+                    <mat-option value="17:00" name="subject_period">17:00</mat-option>
+                    <mat-option value="18:00" name="subject_period">18:00</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Select Day" name="subject_day" ngModel="{{entrys[0].subject_day}}"
+                            #subject_day="ngModel">
+                    <mat-option value="Monday" name="subject_day">Monday</mat-option>
+                    <mat-option value="Tuesday" name="subject_day">Tuesday</mat-option>
+                    <mat-option value="Wednesday" name="subject_day">Wednesday</mat-option>
+                    <mat-option value="Thursday" name="subject_day">Thursday</mat-option>
+                    <mat-option value="Friday" name="subject_day">Friday</mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <button mat-raised-button color="accent" type="submit" [disabled]="!postForm.form.valid">Update Grade
+            </button>
+        </form>
+    </div>
 </ion-content>
