@@ -21,7 +21,7 @@
         <!-- Local array with complete grade object -->
 
         <ion-card>
-            <ion-header>
+            <ion-card-header>
                 <ion-card-title>{{grade.subject_name}}</ion-card-title>
                 <ion-card-subtitle>
                     Type: {{grade.grade_type}}
@@ -32,7 +32,7 @@
                 <ion-card-subtitle>
                     Current Grade: {{grade.curr_grade}}%
                 </ion-card-subtitle>
-            </ion-header>
+            </ion-card-header>
             <mat-card-actions class='buttons'>
                 <!-- Deletes by the subjects _id -->
                 <button mat-button color="warn" (click)="onDelete(grade.id)">Delete Grade</button>

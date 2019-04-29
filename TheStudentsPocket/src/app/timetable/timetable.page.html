@@ -9,14 +9,19 @@
                 <ion-text> Add</ion-text>
             </ion-button>
         </ion-buttons>
-        <ion-title>Timetable Page</ion-title>
+        <ion-title>Timetable</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content class="mainPageRender" *ngIf="timetableEntrys.length > 0 ">
 
+    <!-- Day of week heading -->
     <ion-card>
-        <ion-card-header>Monday</ion-card-header>
+        <ion-card-header>
+            <ion-card-title>
+                Monday
+            </ion-card-title>
+        </ion-card-header>
     </ion-card>
 
     <div class="Container" *ngFor="let timetableEntry of timetableEntrys">
@@ -27,8 +32,8 @@
         <ion-list *ngIf="timetableEntry.subject_day == 'Monday'">
             <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
             <ion-card-header>
-                <ion-card-title>{{timetableEntry.subject_day}} : {{timetableEntry.subject_period}}</ion-card-title>
-                <ion-card-subtitle>{{timetableEntry.subject_name}}, {{timetableEntry.subject_room}}</ion-card-subtitle>
+                <ion-card-title>{{timetableEntry.subject_name}}: {{timetableEntry.subject_period}}</ion-card-title>
+                <ion-card-subtitle>Room: {{timetableEntry.subject_room}}</ion-card-subtitle>
             </ion-card-header>
 
             <mat-card-actions class='buttons'>
@@ -40,16 +45,21 @@
         </ion-list>
     </div>
 
+    <!-- Day of week heading -->
     <ion-card>
-        <ion-card-header>Tuesday</ion-card-header>
+        <ion-card-header>
+            <ion-card-title>
+                Tuesday
+            </ion-card-title>
+        </ion-card-header>
     </ion-card>
 
     <div class="Container" *ngFor="let timetableEntry of timetableEntrys">
         <ion-list *ngIf="timetableEntry.subject_day == 'Tuesday'">
             <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
             <ion-card-header>
-                <ion-card-title>{{timetableEntry.subject_day}} : {{timetableEntry.subject_period}}</ion-card-title>
-                <ion-card-subtitle>{{timetableEntry.subject_name}}, {{timetableEntry.subject_room}}</ion-card-subtitle>
+                <ion-card-title>{{timetableEntry.subject_name}}: {{timetableEntry.subject_period}}</ion-card-title>
+                <ion-card-subtitle>Room: {{timetableEntry.subject_room}}</ion-card-subtitle>
             </ion-card-header>
 
             <mat-card-actions class='buttons'>
@@ -61,16 +71,21 @@
         </ion-list>
     </div>
 
+    <!-- Day of week heading -->
     <ion-card>
-        <ion-card-header>Wednesday</ion-card-header>
+        <ion-card-header>
+            <ion-card-title>
+                Wednesday
+            </ion-card-title>
+        </ion-card-header>
     </ion-card>
 
     <div class="Container" *ngFor="let timetableEntry of timetableEntrys">
         <ion-list *ngIf="timetableEntry.subject_day == 'Wednesday'">
             <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
             <ion-card-header>
-                <ion-card-title>{{timetableEntry.subject_day}} : {{timetableEntry.subject_period}}</ion-card-title>
-                <ion-card-subtitle>{{timetableEntry.subject_name}}, {{timetableEntry.subject_room}}</ion-card-subtitle>
+                <ion-card-title>{{timetableEntry.subject_name}}: {{timetableEntry.subject_period}}</ion-card-title>
+                <ion-card-subtitle>Room: {{timetableEntry.subject_room}}</ion-card-subtitle>
             </ion-card-header>
 
             <mat-card-actions class='buttons'>
@@ -82,16 +97,21 @@
         </ion-list>
     </div>
 
+    <!-- Day of week heading -->
     <ion-card>
-        <ion-card-header>Thursday</ion-card-header>
+        <ion-card-header>
+            <ion-card-title>
+                Thursday
+            </ion-card-title>
+        </ion-card-header>
     </ion-card>
 
     <div class="Container" *ngFor="let timetableEntry of timetableEntrys">
         <ion-list *ngIf="timetableEntry.subject_day == 'Thursday'">
             <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
             <ion-card-header>
-                <ion-card-title>{{timetableEntry.subject_day}} : {{timetableEntry.subject_period}}</ion-card-title>
-                <ion-card-subtitle>{{timetableEntry.subject_name}}, {{timetableEntry.subject_room}}</ion-card-subtitle>
+                <ion-card-title>{{timetableEntry.subject_name}}: {{timetableEntry.subject_period}}</ion-card-title>
+                <ion-card-subtitle>Room: {{timetableEntry.subject_room}}</ion-card-subtitle>
             </ion-card-header>
 
             <mat-card-actions class='buttons'>
@@ -103,16 +123,21 @@
         </ion-list>
     </div>
 
+    <!-- Day of week heading -->
     <ion-card>
-        <ion-card-header>Friday</ion-card-header>
+        <ion-card-header>
+            <ion-card-title>
+                Friday
+            </ion-card-title>
+        </ion-card-header>
     </ion-card>
 
     <div class="Container" *ngFor="let timetableEntry of timetableEntrys">
         <ion-list *ngIf="timetableEntry.subject_day == 'Friday'">
             <!-- Nested array 'subject_info' inside local student object array with subjects in it-->
             <ion-card-header>
-                <ion-card-title>{{timetableEntry.subject_day}} : {{timetableEntry.subject_period}}</ion-card-title>
-                <ion-card-subtitle>{{timetableEntry.subject_name}}, {{timetableEntry.subject_room}}</ion-card-subtitle>
+                <ion-card-title>{{timetableEntry.subject_name}}: {{timetableEntry.subject_period}}</ion-card-title>
+                <ion-card-subtitle>Room: {{timetableEntry.subject_room}}</ion-card-subtitle>
             </ion-card-header>
 
             <mat-card-actions class='buttons'>

@@ -23,7 +23,6 @@ export class TimetablePage implements OnInit {
     } // End delete function
 
     ngOnInit() {
-
         this.api.getAllTimetableEntrys().subscribe(data => {
             this.timetableEntrys = data;
         });

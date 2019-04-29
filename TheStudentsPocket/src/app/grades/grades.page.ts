@@ -25,8 +25,7 @@ export class GradesPage implements OnInit {
     ngOnInit() {
         // Used for retrieving basic grade info
         this.api.getAllGradeInfo().subscribe(data => {
-            console.log(data);
+            this.grades = data;
         });
-    }
-
-}
+    }// End ngOnInit
+}// End class
